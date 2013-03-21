@@ -12,7 +12,3 @@
 # prevent your application from stopping cleanly or starting at all.
 # Application start and stop is subject to different timeouts
 # throughout the system.
-cartridge_type="python-2.6"
-source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
-echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py celery worker celery --loglevel=INFO'"
-nohup python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py celery worker --loglevel=INFO &
