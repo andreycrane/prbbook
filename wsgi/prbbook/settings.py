@@ -156,7 +156,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'kombu.transport.django',
     'djcelery',
-    'south'
+    'south',
+    'prbbook'
 )
 
 # A sample logging configuration. The only tangible logging
