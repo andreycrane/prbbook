@@ -9,5 +9,5 @@ setup(
     author='Andrey Zhuravlyov',
     author_email='example@example.com',
     url='http://www.python.org/sigs/distutils-sig/',
-    install_requires=['Django==1.5', 'South==0.7.6', 'PIL==1.1.7', 'celery==3.0.16', 'django-celery==3.0.11', 'kombu==2.5.7'],
+    install_requires=['Django==1.5', 'South==0.7.6', 'PIL==1.1.7', 'celery==3.0.16', 'django-celery==3.0.11', 'kombu==2.5.7', 'termcolor==1.1.0'],
 )
