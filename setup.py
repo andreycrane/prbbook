@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='Problems Book',
-    version='1.0a',
+    version='1.0.1',
     description='Problems Book application for OpenShift cloud platform',
     author='Andrey Zhuravlyov',
     author_email='example@example.com',
