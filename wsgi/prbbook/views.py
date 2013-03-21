@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic import View
 from prbbook.tasks import create_members
-fromprbbook.models import Group, Member
+from prbbook.models import Group, Member
 from django.http import HttpResponseRedirect, HttpResponse
 from json import dumps
 from termcolor import colored, cprint
