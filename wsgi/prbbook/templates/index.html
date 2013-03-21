@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>Asynctest Application</title>
+	<meta charset="utf-8" />
+    <!-- Bootstrap -->
+    <link href="http://yandex.st/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Sripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://yandex.st/bootstrap/2.2.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<br />
+		<p>Asynctest Application</p>
+		<form action="/" method="post" class="form">
+			<input class="btn btn-primary" type="submit" value="Task" />
+		</form>
+		<div class="row">
+			{% for group in groups %}
+				<div class="well">
+					<script language="javascript">
+						$(function() {
+							var url = "/task/{{ group.id }}/status/";
+
+							var interval = setInterval(function() {
+								$.getJSON(url, function(data) {
+									console.log(data);
+									switch(data.status) {
+										case "PENDING":
+											$("#progress-text_{{ group.id }}").text("Ожидание");
+											break;
+										case "SUCCESS":
+											$("#task_{{ group.id }} div.bar").css("width", "100%");
+											$("#progress-text_{{ group.id }}").text("Завершено");
+											clearInterval(interval);
+											break;
+										case "PROGRESS":
+											$("#task_{{ group.id }} div.bar").css("width", data.process.toString() + "%");
+											$("#progress-text_{{ group.id }}").text("Создано " + data.current.toString() + " из " + data.total.toString());
+											break;
+									}
+								});
+							}, 500);
+						});
+					</script>
+					<div id="task_{{ group.id }}" class="progress">
+						<div class="bar" style="width: 0%;"></div>
+					</div>
+					<div id="progress-text_{{ group.id }}" style="text-align: center; font-style: italic;">
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
