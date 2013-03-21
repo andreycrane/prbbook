@@ -12,3 +12,5 @@
 # prevent your application from stopping cleanly or starting at all.
 # Application start and stop is subject to different timeouts
 # throughout the system.
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py celery worker celery --loglevel=INFO'"
+python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py celery worker --loglevel=INFO
