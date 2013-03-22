@@ -1,0 +1,170 @@
+[2013-03-21 13:08:23,575: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:08:23,576: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:08:23,578: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:11:10,145: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:11:10,147: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:11:10,149: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:24:08,548: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:24:08,551: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:24:08,553: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:27:05,290: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:27:05,292: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:27:05,295: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:28:28,134: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:28:28,136: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:28:28,138: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:33:23,234: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:33:23,235: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:33:23,238: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:43:46,035: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:43:46,037: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:43:46,039: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:44:55,433: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:44:55,435: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:44:55,438: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 13:54:55,281: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 13:54:55,283: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 13:54:55,286: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:00:34,908: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:00:34,909: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:00:34,911: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:07:56,567: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:07:56,568: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:07:56,570: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:08:30,343: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:08:30,345: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:08:30,348: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:09:16,235: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:09:16,236: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:09:16,238: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:09:33,003: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:09:33,004: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:09:33,007: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:10:57,812: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:10:57,813: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:10:57,816: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:11:10,595: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:11:10,596: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:11:10,599: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:12:47,603: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:12:47,604: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:12:47,606: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:13:22,460: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:13:22,461: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:13:22,464: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:14:25,691: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:14:25,692: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:14:25,694: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:15:22,306: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:15:22,307: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:15:22,309: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:15:57,091: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:15:57,093: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:15:57,096: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:19:24,102: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:19:24,103: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:19:24,106: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:20:45,460: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:20:45,462: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:20:45,464: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:24:08,458: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:24:08,460: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:24:08,463: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:24:22,221: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:24:22,222: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:24:22,224: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:24:37,962: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:24:37,964: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:24:37,967: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:28:21,886: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:28:21,888: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:28:21,891: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:29:23,931: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:29:23,933: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:29:23,936: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:29:48,693: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:29:48,695: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:29:48,698: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:36:24,639: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:36:24,641: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:36:24,644: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:37:45,914: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:37:45,916: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:37:45,919: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:45:12,775: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:45:12,777: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:45:12,780: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:47:25,568: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:47:25,570: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:47:25,574: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-21 14:49:07,868: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+[2013-03-21 14:49:07,869: WARNING/MainProcess] celery@ubuntu ready.
+[2013-03-21 14:49:07,872: INFO/MainProcess] consumer: Connected to django://localhost//.

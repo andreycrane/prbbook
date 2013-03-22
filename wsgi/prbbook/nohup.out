@@ -1,0 +1,185 @@
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --pidfile=./celery.pid --logfile=./celery.log --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x9f996cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --pidfile=./celery.pid --logfile=./celery.log --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x93316cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --pidfile=./celery.pid --logfile=./celery.log --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x906a6cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --pidfile=./celery.pid --logfile=./celery.log --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0xa68c6cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --pidfile=./celery.pid --logfile=./celery.log --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x92f36cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x92fa6cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --logfile=./celery.log --pidfile=./celery.pid --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0xa1466cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+
+Restarting celeryd (./manage.py celery worker --loglevel=INFO --logfile=./celery.log --pidfile=./celery.pid --quiet)
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x966a6cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
+/usr/local/lib/python2.7/dist-packages/djcelery/loaders.py:132: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn("Using settings.DEBUG leads to a memory leak, never "
+
+ 
+ -------------- celery@ubuntu v3.0.16 (Chiastic Slide)
+---- **** ----- 
+--- * ***  * -- [Configuration]
+-- * - **** --- . broker:      django://localhost//
+- ** ---------- . app:         default:0x99946cc (djcelery.loaders.DjangoLoader)
+- ** ---------- . concurrency: 2 (processes)
+- ** ---------- . events:      OFF (enable -E to monitor this worker)
+- ** ---------- 
+- *** --- * --- [Queues]
+-- ******* ---- . celery:      exchange:celery(direct) binding:celery
+--- ***** ----- 
+
+[Tasks]
+  . prbbook.tasks.create_members
+
