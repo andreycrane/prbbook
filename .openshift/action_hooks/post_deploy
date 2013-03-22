@@ -41,7 +41,7 @@ then
 else
     echo "Файл ./celery.pid отсутствует"
     echo "Проверяю есть ли процессы celery worker"
-    if [[ `ps -Af | grep "celery worker"`]]
+    if [[ `ps -Af | grep "celery worker"` ]]
     then
     	echo "Процессы существую. Необходимо послать сигнал для перезагрузки"
 	else
