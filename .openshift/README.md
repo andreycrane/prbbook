@@ -1,4 +1,4 @@
-# Django Template for OpenShift
+# Django Template for OpenShift !
 
 ## Template App Information
 Product: Django  
