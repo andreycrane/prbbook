@@ -18,7 +18,14 @@ then
        echo "Процесс указанный в файле ./celery.pid не существует"
        echo "Выполняю \"rm ./celery.pid\""
        rm ./celery.pid
-       start
+       echo "Проверяю не запущены ли в системе веркеры celery"
+       if [[ `ps -Af | grep "celery worker"` ]]
+       then
+          echo "В системе запущены процессы веркеров"
+       else
+          echo "В системе не запущены процессы веркеров"
+          start
+       fi
     fi
 else
     echo "Файл ./celery.pid отсутствует"
