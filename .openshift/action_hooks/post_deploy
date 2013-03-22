@@ -4,8 +4,6 @@
 # it could be python, php, ruby, etc.
 cartridge_type="python-2.6"
 source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
-#echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py celery worker --loglevel=INFO'"
-#nohup python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py celery worker --loglevel=INFO >> /dev/null &
 
 echo "Перехожу в папку $OPENSHIFT_REPO_DIR/wsgi/prbbook/"
 cd $OPENSHIFT_REPO_DIR/wsgi/prbbook/
@@ -19,7 +17,8 @@ function start {
 echo "Проверяю есть ли процессы celery worker"
 if [[ `ps -Af | grep "celery worker" | grep -v grep` ]]
 then
-	echo "Процессы существую. Необходимо послать сигнал для перезагрузки"
+	echo "Процессы существую. Необходимо послать сигнал для перезагрузки веркеров"
+	echo "в случае если были изменены задания."
 else
 	echo "Процессов не существует запускаю celery"
 	start
