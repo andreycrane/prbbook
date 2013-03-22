@@ -9,6 +9,7 @@ source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
 
 echo "Перехожу в папку $OPENSHIFT_REPO_DIR/wsgi/prbbook/"
 cd $OPENSHIFT_REPO_DIR/wsgi/prbbook/
+pwd
 
 function start {
     echo "Выполняю \"nohup ./manage.py celery worker --loglevel=INFO --logfile=./celery.log --pidfile=./celery.pid --quiet >> /dev/null & > /dev/null\""
