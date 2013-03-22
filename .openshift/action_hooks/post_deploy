@@ -10,15 +10,33 @@ cd $OPENSHIFT_REPO_DIR/wsgi/prbbook/
 pwd
 
 function start {
-    echo "Выполняю \"nohup ./manage.py celery worker --loglevel=INFO --logfile=./celery.log --quiet >> /dev/null & > /dev/null\""
-    nohup ./manage.py celery worker --loglevel=INFO --logfile=./celery.log --quiet >> /dev/null & > /dev/null
+    echo "Выполняю \"nohup ./manage.py celery worker --loglevel=INFO --logfile=$OPENSHIFT_DATA_DIR/celery.log --pidfile==$OPENSHIFT_DATA_DIR/celery.pid --quiet >> /dev/null & > /dev/null\""
+    nohup ./manage.py celery worker --loglevel=INFO --logfile=$OPENSHIFT_DATA_DIR/celery.log --pidfile==$OPENSHIFT_DATA_DIR/celery.pid --quiet >> /dev/null & > /dev/null
 } 
 
 echo "Проверяю есть ли процессы celery worker"
 if [[ `ps -Af | grep "celery worker" | grep -v grep` ]]
 then
-	echo "Процессы существую. Необходимо послать сигнал для перезагрузки веркеров"
-	echo "в случае если были изменены задания."
+	echo "!!!Процессы существуют. Необходимо послать сигнал для перезагрузки веркеров"
+	echo "в случае если были изменены заданий.!!!"
+
+	echo "Проверяю наличие файла ID процесса веркера".
+	if [[ -e "$OPENSHIFT_DATA_DIR/celery.pid" ]]
+	then
+		echo "Файл celery.pid существует"
+		echo "Проверяю существует ли процесс указанный в PID файле"
+		pid=`cat $OPENSHIFT_DATA_DIR/celery.pid`
+		if [[ `ps -A | grep $pid` ]]
+		then
+			echo "Процесс указанный в PID файле существует. Посылаю сигнал перезагрузки HUP"
+			kill -s HUP $pid
+		else
+			echo "!!!Процесс указанный в PID файле не существует.!!!"
+		fi
+	else
+		echo "!!!Файл celery.pid не существует!!!"
+		echo "Внимание! Следует вручную убить процессы celery worker's."
+	fi
 else
 	echo "Процессов не существует запускаю celery"
 	start
@@ -26,10 +44,3 @@ fi
 
 echo "Выхожу в изначальный каталог -"
 cd -
-
-if [[ -e $OPENSHIFT_DATA_DIR/celery.pid ]]
-then
-	echo "$OPENSHIFT_DATA_DIR/celery.pid exsists"
-else 
-	echo "$OPENSHIFT_DATA_DIR/celery.pid not exsists"
-fi
