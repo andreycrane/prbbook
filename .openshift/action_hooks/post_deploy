@@ -11,7 +11,7 @@ pwd
 
 function start {
     echo "Выполняю \"nohup ./manage.py celery worker --loglevel=INFO --logfile=$OPENSHIFT_DATA_DIR/celery.log --pidfile==$OPENSHIFT_DATA_DIR/celery.pid --quiet >> /dev/null & > /dev/null\""
-    nohup ./manage.py celery worker --loglevel=INFO --logfile=$OPENSHIFT_DATA_DIR/celery.log --pidfile==$OPENSHIFT_DATA_DIR/celery.pid --quiet >> /dev/null & > /dev/null
+    nohup ./manage.py celery worker --loglevel=INFO --logfile=$OPENSHIFT_DATA_DIR/celery.log --pidfile=$OPENSHIFT_DATA_DIR/celery.pid --quiet >> /dev/null & > /dev/null
 } 
 
 echo "Проверяю есть ли процессы celery worker"
