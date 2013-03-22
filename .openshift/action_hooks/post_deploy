@@ -26,7 +26,7 @@ then
 		echo "Файл celery.pid существует"
 		echo "Проверяю существует ли процесс указанный в PID файле"
 		pid=`cat $OPENSHIFT_DATA_DIR/celery.pid`
-		if [[ `ps -A | grep $pid` ]]
+		if [[ `ps -A | grep $pid` ]] 
 		then
 			echo "Процесс указанный в PID файле существует. Посылаю сигнал перезагрузки HUP"
 			kill -s HUP $pid
