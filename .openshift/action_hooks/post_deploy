@@ -28,8 +28,8 @@ then
 		pid=`cat $OPENSHIFT_DATA_DIR/celery.pid`
 		if [[ `ps -A | grep $pid` ]] 
 		then
-			echo "Процесс указанный в PID файле существует. Посылаю сигнал перезагрузки HUP"
-			kill -s HUP $(cat $OPENSHIFT_DATA_DIR/celery.pid)
+			echo "!!!Процесс указанный в PID файле существует. Необхожимо перезагрузить celery!!!"
+			#kill -s HUP $(cat $OPENSHIFT_DATA_DIR/celery.pid)
 		else
 			echo "!!!Процесс указанный в PID файле не существует.Перезагрузите celery worker's вручную!!!"
 		fi
