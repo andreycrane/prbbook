@@ -31,5 +31,5 @@ if [[ -e $OPENSHIFT_DATA_DIR/celery.pid ]]
 then
 	echo "$OPENSHIFT_DATA_DIR/celery.pid exsists"
 else 
-	echo "$OPENSHIFT_DATA_DIR/celery.pid exsists"
+	echo "$OPENSHIFT_DATA_DIR/celery.pid not exsists"
 fi
