@@ -39,7 +39,7 @@ then
        fi
     fi
 else
-    echo "Файл ./celery.pid отсутствует"
+    echo "Файл ./celery.pid отсутствует" 
     echo "Проверяю есть ли процессы celery worker"
     if [[ `ps -Af | grep "celery worker"` ]]
     then
