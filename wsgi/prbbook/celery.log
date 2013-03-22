@@ -183,3 +183,52 @@
 
 [2013-03-22 09:50:36,863: WARNING/MainProcess] celery@ubuntu ready.
 [2013-03-22 09:50:36,869: INFO/MainProcess] consumer: Connected to django://localhost//.
+[2013-03-22 11:45:59,510: ERROR/MainProcess] Unrecoverable error: DatabaseError(2013, 'Lost connection to MySQL server during query')
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/__init__.py", line 356, in start
+    component.start()
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer.py", line 393, in start
+    self.consume_messages()
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer.py", line 886, in consume_messages
+    self.connection.drain_events(timeout=10.0)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/connection.py", line 277, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/__init__.py", line 760, in drain_events
+    item, channel = get(timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/scheduling.py", line 39, in get
+    return self.fun(resource, **kwargs), resource
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/__init__.py", line 780, in _drain_channel
+    return channel.drain_events(timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/__init__.py", line 578, in drain_events
+    return self._poll(self.cycle, timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/__init__.py", line 287, in _poll
+    return cycle.get()
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/virtual/scheduling.py", line 39, in get
+    return self.fun(resource, **kwargs), resource
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/django/__init__.py", line 40, in _get
+    m = Queue.objects.fetch(queue)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/transport/django/managers.py", line 18, in fetch
+    queue = self.get(name=queue_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/manager.py", line 143, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 394, in get
+    num = len(clone)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 90, in __len__
+    self._result_cache = list(self.iterator())
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/mysql/base.py", line 128, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/mysql/base.py", line 120, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/cursors.py", line 174, in execute
+    self.errorhandler(self, exc, value)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+DatabaseError: (2013, 'Lost connection to MySQL server during query')
