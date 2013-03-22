@@ -40,7 +40,14 @@ then
     fi
 else
     echo "Файл ./celery.pid отсутствует"
-    start
+    echo "Проверяю есть ли процессы celery worker"
+    if [[ `ps -Af | grep "celery worker"`]]
+    then
+    	echo "Процессы существую. Необходимо послать сигнал для перезагрузки"
+	else
+		echo "Процессов не существует запускаю celery"
+		start
+	fi
 fi
 
 echo "Выхожу в изначальный каталог -"
