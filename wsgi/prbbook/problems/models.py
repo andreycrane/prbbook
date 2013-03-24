@@ -13,7 +13,7 @@ class ProblemGroup(models.Model):
 	name = models.CharField(max_length = 255, blank = True, default = u"Без названия", 
 							verbose_name = u"Название группы заданий")
 	datetime = models.DateTimeField(auto_now = True, auto_now_add = True, verbose_name = u"Дата и время создания")
-	fake = models.BooleanField(blank = True, default = True) # fake field
+	
 	class Meta:
 		verbose_name = u"Группа заданий"
 		verbose_name_plural = u"Группы заданий"
