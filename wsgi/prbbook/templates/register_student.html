@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'js/transliterate.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="students" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "students_nav_tabs.html" with menu="register_student" %}
+			</div>
+			<div class="span10">
+				<div class="span6">
+					{% if student %}
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							Студент <strong>{{ student.first_name }} {{ student.get_profile.group }}</strong> зарегистрирован под логином {{ student.username }}. 
+						</div>
+					{% endif %}
+					<form id="register_form" class="form-horizontal" method="post" action={% url "register_student" %}>
+						<fieldset>
+							<legend>Зарегистрировать студента</legend>
+							<div class="control-group">
+	    						<label class="control-label" for="first_name">ФИО:</label>
+	    						<div class="controls">
+	      							{{ form.name }}
+	      							<label class="checkbox">
+  										<input type="checkbox" id="translitCheckbox" value="option1">
+  										Включить транслитерацию для логина
+									</label>
+									{% if form.name.errors %}
+									<ul class="unstyled">
+									  {% for error in form.name.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+									{% endif %}
+	    						</div>
+	  						</div>
+							<div class="control-group">
+	    						<label class="control-label" for="id_group">Группа:</label>
+	    						<div class="controls">
+	      							{{ form.group }}
+	      							{% if form.group.errors %}
+									<ul class="unstyled">
+									  {% for error in form.group.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+									{% endif %}
+	    						</div>
+	  						</div>
+							<div class="control-group">
+	    						<label class="control-label" for="id_login">Логин:</label>
+	    						<div class="controls">
+	      							{{ form.login }}
+	      							{% if form.login.errors %}
+									<ul class="unstyled">
+									  {% for error in form.login.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+									{% endif %}
+	    						</div>
+	  						</div>
+	  						<div class="control-group">
+	    						<label class="control-label" for="id_password">Пароль:</label>
+	    						<div class="controls">
+	      							{{ form.password }}
+	      							{% if form.password.errors %}
+									<ul class="unstyled">
+									  {% for error in form.password.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+									{% endif %}
+	    						</div>
+	  						</div>
+	  						<div class="control-group">
+	    						<label class="control-label" for="id_retype">Повторить:</label>
+	    						<div class="controls">
+	      							{{ form.retype }}
+	      							{% if form.retype.errors %}
+									<ul class="unstyled">
+									  {% for error in form.retype.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+									{% endif %}
+	    						</div>
+	  						</div>
+	  						<button class="btn btn-primary">Зарегистрировать</button>
+						</fieldset>
+					</form>
+				</div>
+				<div class="span5">
+					<br />
+					<br />
+					<br />
+					<br />
+					<p>
+						Опция <span class="text-info">"Включить транслитерацию для логина"</span> предназначена для автоматического формирования логина для студента при вводе ФИО. Помогает экономить время. 
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

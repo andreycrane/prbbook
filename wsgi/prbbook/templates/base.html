@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>{% block title %}Сборник задач{% endblock %}</title>
+    <meta charset="utf-8" />
+    <!-- Bootstrap -->
+    <link href="http://yandex.st/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Sripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://yandex.st/bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet/less" type="text/css" href="{% static 'css/base.less' %}" media="screen" />
+    {% block styles %}
+    {% endblock %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js"></script>
+    <!-- Scripts -->
+    {% block scripts %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>

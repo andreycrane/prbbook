@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{% include "students_nav.html" with menu="problems" %}
+		</div>
+		<br />
+		<br />
+		<div class="row">
+			<table class="table table-striped">
+				{% for problem in problems %}
+					<tr>
+						<td>{{ problem.group.name }}</td>
+						<td>{{ problem.get_problem_engine_display }}</td>
+						<td><a href="/problems/problem/{{ problem.id }}/student/">Просмотреть</a></td>
+					</tr>
+				{% empty %}
+					<tr>
+						<td>
+							Нет заданий.
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="students" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "students_nav_tabs.html" with menu="all_groups" %}
+			</div>
+			<div class="span10">
+				<p class="lead">Список групп:</p>
+				<table class="table table-striped table-hover">
+					<tbody>
+						{% for group in groups %}
+							<tr>
+								<td>{{ group.name }}</td>
+								<td>
+									<span class="pull-right">
+										<a href={% url "students_of_group" group.id %}>Просмотреть</a>
+									</span>
+								</td>
+							</tr>
+						{% empty %}
+							<p>Не зарегистриованно групп.</p>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% ifnotequal 1 groups.paginator.num_pages %}
+				<div class="pagination pagination-centered pagination-small">
+					<ul>
+						{% if groups.has_previous %}
+							<li><a href={% url "students_groups_page" groups.previous_page_number %}>&larr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&larr;</a></li>
+						{% endif %}
+
+						{% for page in groups.paginator.page_range %}
+							{% ifequal page groups.number %}
+								<li class="disabled"><a href={% url "students_groups_page" page %}>{{ page }}</a></li>
+							{% else %}
+								<li><a href={% url "students_groups_page" page %}>{{ page }}</a></li>
+							{% endifequal %}
+						{% endfor %}
+
+						{% if groups.has_next %}
+							<li><a href={% url "students_groups_page" groups.next_page_number%}>&rarr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&rarr;</a></li>
+						{% endif %}
+					</ul>
+				</div>
+				{% endifnotequal %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

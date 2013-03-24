@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="problems" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "problems_nav_tab.html" with menu="create_problems" %}
+			</div>
+			<div class="span10">
+				{% if group %}
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Группа заданий <strong>{{ group.name }} </strong> сгенерирована. 
+						<a class="alert-link" href="/problems/group/{{ group.id }}/" href={% url "group_problems_list" group.id %}>Просмотреть</a> задания. 
+					</div>
+				{% endif %}
+				<legend>Создание группы заданий</legend>
+				<form class="form-horizontal" method="post" action="/problems/create/">
+					{% for field in form %}
+						<div class="control-group">
+							<label class="control-label">{{ field.label }}:</label>
+							<div class="controls">
+								{{ field }}
+								{% if field.errors %}
+									<ul class="unstyled">
+									  {% for error in field.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+					<button type="submit" class="btn btn-primary">Создать</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

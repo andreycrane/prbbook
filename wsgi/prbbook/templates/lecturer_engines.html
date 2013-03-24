@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+
+{% block title %}
+	Панель преподователя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/lecturer_engines.less' %}" media="screen" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="engines" %}
+	<div class="container engines">
+		<div class="row">
+			<legend>В сборник добавлены следующие задачи:</legend>
+			{% for engine in engines %}
+				<div class="engine-box">
+					{% autoescape off %}
+						<p class="lead">{{ engine.name }}</p>
+						<p>{{ engine.description }}</p>
+						<a class="btn btn-info right" href="/engine/preview/{{ engine.short_name }}/">Просмотр</a>
+					{% endautoescape %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

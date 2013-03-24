@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Панель преподавателя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="problems" %}
+	<div class="container page">
+		<div class="row">
+			<a href="/problems/">&larr;Группы заданий</a>
+			<br /><br />
+			<p class="lead">Задания в "{{ group.name }}"</p>
+			<table class="table">
+				<tbody>
+					{% for group in problems_groups %}
+						<!-- {% cycle 'white' '#f9f9f9' as rowcolor %} -->
+						<!-- {% cycle 'badge-success' 'badge-warning' 'badge-important' 'badge-info' 'badge-inverse' as badge %} -->
+						{% for problem in group %}
+							<tr style="background-color: {{ rowcolor }};">
+								<td>{{ problem.user.first_name }}</td>
+								<td>{{ problem.get_problem_engine_display }}</td>
+								<td>
+									<a href="/problems/problem/{{ problem.id }}/">Просмотреть</a>
+									{% if group|length > 1 %}
+										&nbsp;<span class="badge {{ badge }}">
+											&nbsp;
+											<abbr title="Перегенерировать">
+												<a href="/problems/problem/{{ problem.id }}/regenerate/">R</a>
+											</abbr>
+											&nbsp;
+										</span>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}						
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

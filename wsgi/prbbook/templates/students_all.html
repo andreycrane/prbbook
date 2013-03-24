@@ -1,0 +1,68 @@
+{%extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+
+{% block title %}
+	Панель преподователя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="students" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "students_nav_tabs.html" with menu="all_students" %}
+			</div>
+			<div class="span10">
+				<p class="lead">Список студентов:</p>
+				<table class="table table-striped">
+					<tbody>
+						{% for student in students %}
+							<tr>
+								<td>{{ student.first_name }}</td>
+								<td>{{ student.username }}</td>
+								<td>{{ student.userprofile.group.name }}</td>
+								<td>
+									<span class="pull-right">
+										<a href="/students/student/{{ student.id }}/problems/">Лист заданий</a>
+									</span>
+								</td>
+							</tr>
+						{% empty %}
+							<p>Не зарегистрировано студентов.</p>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% ifnotequal 1 students.paginator.num_pages %}
+				<div class="pagination pagination-centered pagination-small">
+					<ul>
+						{% if students.has_previous %}
+							<li><a href="/students/page/{{ students.previous_page_number }}/">&larr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&larr;</a></li>
+						{% endif %}
+
+						{% for page in students.paginator.page_range %}
+							{% ifequal page students.number %}
+								<li class="disabled"><a href="/students/page/{{ page }}/">{{ page }}</a></li>
+							{% else %}
+								<li><a href="/students/page/{{ page }}/">{{ page }}</a></li>
+							{% endifequal %}
+						{% endfor %}
+
+						{% if students.has_next %}
+							<li><a href="/students/page/{{ students.next_page_number }}/">&rarr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&rarr;</a></li>
+						{% endif %}
+					</ul>
+				</div>
+				{% endifnotequal %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

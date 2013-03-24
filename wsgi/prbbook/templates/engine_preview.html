@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load webdesign %}
+
+{% block title %}
+	{{ prb.name }}
+{% endblock %}
+
+{% block styles %}
+	<style>
+		.image {
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.image img {
+			margin: 0 auto;
+		}
+
+		body {
+			margin-bottom: 30px;
+		}
+
+		li {
+			margin-bottom: 3px;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<a href="/">&larr;На главную</a>
+		<br />
+		<br />
+		<p class="lead">{{ prb.name }}</p>
+		{% autoescape off %}
+			<p>{{ prb.description }}</p>
+		{% endautoescape %}
+		<hr />
+		<div class="span5">
+			<p class="lead">Исходные данные к задаче:</p>
+			<ul class="unstyled">
+				{% autoescape off %}
+					{% for param in in_params %}
+						<li>
+							{% for key, value in param.items %}
+								<li>
+									{{ key }}:
+									<ul>
+										{% for name, zn in value %}
+										<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+										{% endfor %}
+									</ul>
+								</li>
+							{% endfor %}
+						</li>
+					{% endfor %}
+				{% endautoescape %}
+			</ul>
+		</div>
+		<div class="span7">
+			<figure class="image">
+				<p>
+					<img src="/engine/preview/{{ prb.short_name }}/img/1/" />
+				</p>
+				<figurecaption>
+					Рисунок к заданию
+				</figurecaption>
+			</figure>
+		</div>
+	</div>
+	<div class="row">
+		<hr />
+	</div>
+	<div class="row">
+		<div class="span5">
+			<p class="lead">Расчитанные данные задачи:</p>
+			<ul class="unstyled">
+				{% autoescape off %}
+					{% for param in out_params %}
+						<li>
+							{% for key, value in param.items %}
+								<li>
+									{{ key }}:
+									<ul>
+										{% for name, zn in value %}
+										<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+										{% endfor %}
+									</ul>
+								</li>
+							{% endfor %}
+						</li>
+					{% endfor %}
+				{% endautoescape %}
+			</ul>
+		</div>
+		<div class="span7">
+			<figure class="image">
+				<p>
+					<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+				</p>
+				<figurecaption>
+					Рисунок для сверки
+				</figurecaption>
+			</figure>
+		</div>
+	</div>
+</div>
+{% endblock %}

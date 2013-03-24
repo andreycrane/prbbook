@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="students" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "students_nav_tabs.html" with menu="add_group" %}
+			</div>
+			<div class="span6">
+				{% if group %}
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Группа <strong>{{ group.name }}</strong> добавлена.
+					</div>
+				{% endif %}
+				<form class="form-horizontal" method="post" action={% url "add_group" %}>
+					<legend>Добавить группу</legend>
+					<div class="control-group">
+	    				<label class="control-label" for="id_name">Группа:</label>
+	    				<div class="controls">
+	      					<input type="text" id="id_name" name="name" placeholder="Индекс группы" />
+	      					{% if form.name.errors %}
+							<ul class="unstyled">
+							  {% for error in form.name.errors %}
+						          <li>
+							    	<small class="text-error">{{ error|escape }}</small>
+						          </li>
+							  {% endfor %}
+							</ul>
+							{% endif %}
+	    				</div>
+	  				</div>
+	  				<button class="btn btn-primary">Добавить</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

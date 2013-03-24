@@ -1,0 +1,17 @@
+<div class="container">
+  <div id="form" class="offset4 span3">
+    <form action="/login/" method="post">
+      {% for error in form.password.errors %}
+          <small class="text-error">{{ error }}</small>
+      {% endfor %}
+      <fieldset>
+	{{ form.username }}
+	{{ form.password }}
+	<label class="checkbox">
+	  {{ form.remember_me }} Запомнить меня 
+	  <input type="submit" value="Войти" class="btn btn-primary pull-right"/>
+	</label>
+      </fieldset>
+    </form>
+  </div>
+</div>

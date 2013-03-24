@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Панель преподавателя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	<div class="container page">
+		<div class="row">
+			{% include "lecturer_nav_bar.html" with menu="students" %}
+			<p class="lead">Список заданий студента {{ student.first_name }} {{ student.userprofile.group }}</p>
+			<table class="table table-striped">
+				<tbody>
+					{% for problem in problems %}
+						<tr>
+							<td>{{ problem.group }}</td>
+							<td>{{ problem.get_problem_engine_display }}</td>
+							<td>
+								<a href="/problems/problem/{{ problem.id }}/">Перейти к заданию</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

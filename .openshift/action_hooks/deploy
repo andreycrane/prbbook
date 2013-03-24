@@ -17,7 +17,7 @@ source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
 #     python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py syncdb --noinput
 # fi
 
-echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py syncdb --noinput --all'"
-python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py syncdb --noinput --all
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py migrate'"
+python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py migrate
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/prbbook/manage.py collectstatic --noinput'"
 python "$OPENSHIFT_REPO_DIR"wsgi/prbbook/manage.py collectstatic --noinput

@@ -152,12 +152,22 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.webdesign',
     'django.contrib.admin',
     'kombu.transport.django',
     'djcelery',
     'south',
-    'prbbook'
+    'prbbook',
+    'prbbook.problems',
+    'prbbook.students'
 )
+
+AUTH_PROFILE_MODULE = 'students.UserProfile'
+
+from engines.lib.manager import EngineManager
+from engines import engine_1
+
+EngineManager.add_engine(engine_1.ProblemEngine)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

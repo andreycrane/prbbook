@@ -1,0 +1,18 @@
+<ul class="unstyled">
+	{% autoescape off %}
+		{% for param in out_params %}
+			<li>
+				{% for key, value in param.items %}
+					<li>
+						{{ key }}:
+						<ul>
+							{% for name, zn in value %}
+							<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</li>
+		{% endfor %}
+	{% endautoescape %}
+</ul>

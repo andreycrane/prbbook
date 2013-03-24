@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block styles %}
+<link rel="stylesheet/less" type="text/css" href="{% static 'css/login.less' %}" />
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+      <div class="row-fluid">
+	<div class="header">
+	  <br />
+	  <a class="brand" href="/">Сборник задач</a>
+	</div>
+      </div>
+    </div>
+    <br />
+    {% include 'login_form.html' %}
+{% endblock %}

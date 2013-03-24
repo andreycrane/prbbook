@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/forms.less' %}" />
+{% endblock %}
+
+{% block scripts %}
+	<script type="application/x-javascript" src="{% static 'js/serializate.js' %}"></script>
+	<script type="application/x-javascript" src="http://yandex.st/json2/2011-10-19/json2.min.js"></script>
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="problems" %}
+	<div class="container page">
+		<div class="row">
+			{% if saved %}
+				<div class="alert alert-success in">
+  					<button type="button" class="close" data-dismiss="alert">&times;</button>
+ 					Новые исходные данные успешно сохранены.
+				</div>
+			{% endif %}
+			<a href="/problems/group/{{ problem.group.id }}/">&larr;Группа заданий</a>
+			<br />
+			<br />
+			<p class="pull-right">{{ problem.group.name }} - {{ problem.user.first_name }} {{ problem.user.userprofile.group.name }}</p>
+			{% autoescape off %}
+				<p class="lead">{{ engine.name }}</p>
+				<p>{{ engine.description }}</p>
+			{% endautoescape %}
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="pull-right"><a href="#tab2" data-toggle="tab">Изменить</a></li>
+					<li class="active pull-right"><a href="#tab1" data-toggle="tab">Сохранено</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab1">
+						<div class="span5">
+							<p class="lead">Исходные данные к задаче:</p>
+							<ul class="unstyled">
+								{% autoescape off %}
+									{% for param in in_params %}
+										<li>
+											{% for key, value in param.items %}
+												{{ key }}:
+												<ul>
+													{% for name, zn in value %}
+													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+													{% endfor %}
+												</ul>
+											{% endfor %}
+										</li>
+									{% endfor %}
+								{% endautoescape %}
+							</ul>
+						</div>
+						<div class="span7">
+							<figure class="engine-image">
+								<p>
+									<img src="/problems/problem/{{ problem.id }}/img/" />
+								</p>
+								<figurecaption>
+									Рисунок к заданию
+								</figurecaption>
+							</figure>
+						</div>
+						<div class="span12">
+							<hr />
+						</div>
+						<div class="span5">
+							<p class="lead">Расчитанные данные задачи:</p>
+							<ul class="unstyled">
+								{% autoescape off %}
+									{% for param in out_params %}
+										<li>
+											{% for key, value in param.items %}
+												<li>
+													{{ key }}:
+													<ul>
+														{% for name, zn in value %}
+														<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+														{% endfor %}
+													</ul>
+												</li>
+											{% endfor %}
+										</li>
+									{% endfor %}
+								{% endautoescape %}
+							</ul>
+						</div>
+						<div class="span7">
+							<figure class="engine-image">
+								<p>
+									<img src="/problems/problem/{{ problem.id }}/img/{{ ProblemEngine.stage_count }}/" />
+								</p>
+								<figurecaption>
+									Рисунок для сверки
+								</figurecaption>
+							</figure>
+						</div>
+						<div class="span12">
+							<hr />
+						</div>
+				   	</div>
+				    <div class="tab-pane" id="tab2">
+				    	<div class="span5">
+				    		<p class="lead">Форма исходных данных:</p>
+					    	<form id="edit_form" class="form form-horizontal" method="post">
+								{% autoescape off %}
+									{% for param in in_params %}
+										{% for group, params in param.items %}
+											<p class="params-group">{{ group }}:</p>
+												{% for description, value, name in params %}
+												<div class="control-group">
+													<label class="control-label" for="input">{{ description }}</label>
+													<div class="controls">
+														<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/>
+													</div>
+												</div>
+												{% endfor %}
+										{% endfor %}
+									{% endfor %}
+								{% endautoescape %}
+								<button id="preview" type="button" class="btn">Предосмотр</button>
+								<button id="save" type="submit" class="btn btn-primary">Сохранить</button>
+					    	</form>
+					    </div>
+					    <div class="span7">
+							<figure class="engine-image">
+								<p>
+									<img id="first_image" problem="{{ problem.id }}" stages="{{ ProblemEngine.stage_count }}" src="/problems/problem/{{ problem.id }}/img/" />
+								</p>
+								<figurecaption>
+									Рисунок для сверки
+								</figurecaption>
+							</figure>
+						</div>
+						<div class="span12">
+							<hr />
+						</div>
+						<div class="span5">
+							<p class="lead">Расчитанные данные задачи:</p>
+							<div id="out_params">
+								<ul class="unstyled">
+									{% autoescape off %}
+										{% for param in out_params %}
+											<li>
+												{% for key, value in param.items %}
+													<li>
+														{{ key }}:
+														<ul>
+															{% for name, zn in value %}
+															<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+															{% endfor %}
+														</ul>
+													</li>
+												{% endfor %}
+											</li>
+										{% endfor %}
+									{% endautoescape %}
+								</ul>
+							</div>
+						</div>
+						<div class="span7">
+							<figure class="engine-image">
+								<p>
+									<img id="second_image" src="/problems/problem/{{ problem.id }}/img/{{ ProblemEngine.stage_count }}/" />
+								</p>
+								<figurecaption>
+									Рисунок для сверки
+								</figurecaption>
+							</figure>
+						</div>
+						<div class="span12">
+							<hr />
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="error-modal" class="modal hide fade" tabindex="-1">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Ошибка в исходных данных</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p id="error-text"></p>
+	  </div>
+	</div>
+	<div id="save-error-modal" class="modal hide fade" tabindex="-1">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Невозможно сохранить изменения.</h3>
+	  </div>
+	  <div class="modal-body">
+	  	<p>Ошибка в заданных исходных данных.</p>
+	    <p id="save-error-text"></p>
+	  </div>
+	</div>
+{% endblock %}

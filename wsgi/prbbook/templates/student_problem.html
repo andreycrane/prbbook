@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{% include "students_nav.html" with menu="problems" %}
+		</div>
+		<div class="row">
+			<a href="/">&larr;Список заданий</a>
+		</div>
+		<br />
+		<div class="row">
+			{% autoescape off %}
+				<p class="lead">{{ problem.group.name }}: {{ problem.get_problem_engine_display }}</p>
+				<p>{{ engine.description }}</p>
+			{% endautoescape %}
+		</div>
+		<br />
+		<br />
+		<div class="row">
+			<div class="span4">
+				<p class="lead">Исходные данные к задаче:</p>
+				<ul class="unstyled">
+					{% autoescape off %}
+						{% for param in in_params %}
+							<li>
+								{% for key, value in param.items %}
+									<li style="padding-bottom: 10px;">
+										{{ key }}:
+										<ul>
+											{% for name, zn in value %}
+												<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+											{% endfor %}
+										</ul>
+								</li>
+									</li>
+								{% endfor %}
+							</li>
+						{% endfor %}
+					{% endautoescape %}
+				</ul>
+			</div>
+			<div class="span8">
+				<figure class="engine-image">
+					<p>
+						<img src="/problems/problem/{{ problem.id }}/img/student/" />
+					</p>
+					<figurecaption>
+						Рисунок к заданию
+					</figurecaption>
+				</figure>
+			</div>
+		</div>
+		<br />
+		<br />
+	</div>
+{% endblock %}

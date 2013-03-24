@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+
+{% block title %}
+	Панель преподавателя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/forms.less' %}" />
+{% endblock %}
+
+{% block body %}
+	<div class="container page">
+		<div class="row">
+			{% include "lecturer_nav_bar.html" %}
+			{% if changes_saved %}
+				<div class="alert alert-info">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Изменения успешно сохранены.
+				</div>
+			{% endif %}
+			<legend>Профиль</legend>
+			<form id="login_form" class="form form-horizontal" method="post" action="/profile/">
+				<div class="control-group">
+					<label class="control-label">Логин:</label>
+					<div class="controls">
+						<div class="input-append">
+							{{ login_form.login }}
+							<button id="change_btn" class="btn" disabled>Сменить</button>
+							<script type="application/x-javascript" language="javascript">
+								$(function() {
+									initial_login = $("#id_login").val();
+
+									$("#id_login").keypress(function(e) {
+										if(e.keyCode == 13) return false;
+									});
+									
+									$("#id_login").bind("input", function(e) {
+										current_value = $(this).val();
+										console.log(current_value);
+										if(current_value != initial_login) {
+											$("#change_btn").prop("disabled", false);
+										} else {
+											$("#change_btn").prop("disabled", true);
+										}
+									});
+								});
+							</script>
+						</div>
+						{% if login_form.login.errors %}
+							<ul class="unstyled  errors">
+							  {% for error in login_form.login.errors %}
+						          <li>
+							    	<small class="text-error">{{ error|escape }}</small>
+						          </li>
+							  {% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+				<input type="hidden" name="action" value="login" />
+			</form>
+			<form class="form form-horizontal" method="post" action="/profile/">
+				<p class="lead">Смена пароля</p>
+				<div class="control-group">
+					<label class="control-label">Текущий пароль</label>
+					<div class="controls">
+						{{ password_form.password }}
+						{% if password_form.password.errors %}
+							<ul class="unstyled errors">
+							  {% for error in password_form.password.errors %}
+						          <li>
+							    	<small class="text-error">{{ error|escape }}</small>
+						          </li>
+							  {% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Новый пароль</label>
+					<div class="controls">
+						{{ password_form.new_password }}
+						{% if password_form.new_password.errors %}
+							<ul class="unstyled  errors">
+							  {% for error in password_form.new_password.errors %}
+						          <li>
+							    	<small class="text-error">{{ error|escape }}</small>
+						          </li>
+							  {% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Повторите пароль</label>
+					<div class="controls">
+						{{ password_form.retype_new}}
+						{% if password_form.retype_new.errors %}
+							<ul class="unstyled  errors">
+							  {% for error in password_form.retype_new.errors %}
+						          <li>
+							    	<small class="text-error">{{ error|escape }}</small>
+						          </li>
+							  {% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+				<input type="hidden" name="action" value="password" />
+				<br />
+				<button class="btn btn-primary" >Сохранить новый пароль</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

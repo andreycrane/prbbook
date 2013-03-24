@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Панель преподавателя
+{% endblock %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" media="screen" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="problems" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "problems_nav_tab.html" with menu="problems_groups" %}
+			</div>
+			<div class="span10">
+				<p class="lead">Группы заданий:</p>
+				<table class="table table-striped">
+					<tbody>
+						{% for group in groups %}
+							<tr>
+								<td>{{ group.name }}</td>
+								<td>{{ group.date }}</td>
+								<td><a href="/problems/group/{{ group.id }}/print/">Печатная версия</a></td>
+								<td><a href="/problems/group/{{ group.id }}/">Перейти</a></td>
+							</tr>
+						{% empty %}
+							<p>Не создано групп заданий.</p>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% ifnotequal 1 groups.paginator.num_pages %}
+				<div class="pagination pagination-centered pagination-small">
+					<ul>
+						{% if groups.has_previous %}
+							<li><a href="/problems/page/{{ students.previous_page_number }}/">&larr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&larr;</a></li>
+						{% endif %}
+
+						{% for page in groups.paginator.page_range %}
+							{% ifequal page groups.number %}
+								<li class="disabled"><a href="/problems/page/{{ page }}/">{{ page }}</a></li>
+							{% else %}
+								<li><a href="/problems/page/{{ page }}/">{{ page }}</a></li>
+							{% endifequal %}
+						{% endfor %}
+
+						{% if students.has_next %}
+							<li><a href="/problems/page/{{ students.next_page_number }}/">&rarr;</a></li>
+						{% else %}
+							<li class="disabled"><a href="#">&rarr;</a></li>
+						{% endif %}
+					</ul>
+				</div>
+				{% endifnotequal %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
