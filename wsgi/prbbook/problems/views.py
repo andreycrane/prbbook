@@ -82,7 +82,6 @@ def create_problems(request):
             # создаем объект задания и передаем ему все необходимые данные
             problem = Problem(user = user, problem_engine = engine_name,
                 problem_in_params = engine.get_store_str(), # передаем в задание исходные данные 
-                problem_out_params = "{ json: 'json' }",    # в виде JSON
                 group = problems_group)
             problem.save()
         group = problems_group

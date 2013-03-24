@@ -12,7 +12,7 @@ class Migration(SchemaMigration):
         db.create_table(u'problems_problemgroup', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(default=u'\u0411\u0435\u0437 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u044f', max_length=255, blank=True)),
-            ('date', self.gf('django.db.models.fields.DateField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'problems', ['ProblemGroup'])
 
@@ -23,6 +23,7 @@ class Migration(SchemaMigration):
             ('problem_engine', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('problem_in_params', self.gf('django.db.models.fields.TextField')()),
             ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['problems.ProblemGroup'])),
+            ('new', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'problems', ['Problem'])
 
@@ -76,13 +77,14 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Problem'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['problems.ProblemGroup']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'new': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'problem_engine': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'problem_in_params': ('django.db.models.fields.TextField', [], {}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         u'problems.problemgroup': {
-            'Meta': {'ordering': "['-date', '-name']", 'object_name': 'ProblemGroup'},
-            'date': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'Meta': {'ordering': "['-datetime', '-name']", 'object_name': 'ProblemGroup'},
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'default': "u'\\u0411\\u0435\\u0437 \\u043d\\u0430\\u0437\\u0432\\u0430\\u043d\\u0438\\u044f'", 'max_length': '255', 'blank': 'True'})
         }
