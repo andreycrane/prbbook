@@ -157,9 +157,9 @@ INSTALLED_APPS = (
     'kombu.transport.django',
     'djcelery',
     'south',
-    #'prbbook',
-    #'prbbook.problems',
-    #'prbbook.students'
+    'prbbook',
+    'prbbook.problems',
+    'prbbook.students'
 )
 
 AUTH_PROFILE_MODULE = 'students.UserProfile'
