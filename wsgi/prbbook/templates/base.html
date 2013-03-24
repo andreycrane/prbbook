@@ -5,15 +5,15 @@
     <title>{% block title %}Сборник задач{% endblock %}</title>
     <meta charset="utf-8" />
     <!-- Bootstrap -->
-    <link href="//yandex.st/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href={% static "css/bootstrap.min.css" %} rel="stylesheet">
     <!-- Sripts -->
-    <script src="//code.jquery.com/jquery-latest.js"></script>
-    <script src="//yandex.st/bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="{% satic 'js/jquery-latest.js' %}"></script>
+    <script src="{$ static '/js/bootstrap.min.js' %}"></script>
     <!-- Styles -->
     <link rel="stylesheet/less" type="text/css" href="{% static 'css/base.less' %}" media="screen" />
     {% block styles %}
     {% endblock %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js"></script>
+    <script src="{% static 'js/less.min.js' %}"></script>
     <!-- Scripts -->
     {% block scripts %}
     {% endblock %}
