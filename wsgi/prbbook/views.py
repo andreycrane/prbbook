@@ -42,7 +42,13 @@ def home(request):
     if user.is_superuser:
         return render_to_response("lecturer_engines.html", { 'engines': settings.EngineManager.engines })
     else:
-        return render_to_response("student_panel.html", { 'problems': Problem.objects.filter(user = user) })
+        problems = Problem.objects.filter(user = user)
+        for problem in problems:
+            if problem.new:
+                problem.is_new = True
+                problem.new = False
+                problem.save()
+        return render_to_response("student_panel.html", { 'problems':  problems })
 
 @login_required(login_url = '/login/')
 @admin_only

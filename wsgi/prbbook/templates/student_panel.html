@@ -13,7 +13,18 @@
 					<tr>
 						<td>{{ problem.group.name }}</td>
 						<td>{{ problem.get_problem_engine_display }}</td>
-						<td><a href="/problems/problem/{{ problem.id }}/student/">Просмотреть</a></td>
+						<td>
+							<a href="/problems/problem/{{ problem.id }}/student/">
+								Просмотреть
+							</a>
+						</td>
+						<td>
+							{% if problem.is_new %}
+								<span class="label label-info">New</span>
+							{% else %}
+								&nbsp;
+							{% endif %}
+						</td>
 					</tr>
 				{% empty %}
 					<tr>
