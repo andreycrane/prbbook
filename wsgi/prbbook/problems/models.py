@@ -13,6 +13,9 @@ class ProblemGroup(models.Model):
 	name = models.CharField(max_length = 255, blank = True, default = u"Без названия", 
 							verbose_name = u"Название группы заданий")
 	datetime = models.DateTimeField(auto_now = True, auto_now_add = True, verbose_name = u"Дата и время создания")
+	# поля модели необходимые для реализации асинхронности
+	task_id = models.CharField(max_length = 255, blank = True, default = u'', verbose_name = u"ИД задания")
+	created = models.BooleanField(default = False, verbose_name = u"Задания созданы")
 	
 	class Meta:
 		verbose_name = u"Группа заданий"

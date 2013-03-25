@@ -11,5 +11,5 @@ class ProblemsForm(forms.Form):
 							}))
 	groups = forms.ModelMultipleChoiceField(queryset = Group.objects.all(), required = True, 
 										label = u"Кому")
-	engines = forms.MultipleChoiceField(choices = settings.EngineManager.get_choices(), required = True, 
+	engines = forms.MultipleChoiceField(choices = settings.EngineManager.get_subcat_choices(), required = True, 
 									label = u"Задачи")

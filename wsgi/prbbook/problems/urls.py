@@ -14,7 +14,9 @@ urlpatterns = patterns('prbbook.problems.views',
 		+ '(\s*\"[a-zA-Z]+\w*\"\s*:\s*\d+\.*\d*\s*){1}})/stage/(?P<stage>\d+)/$', 'problem_preview_img'),
 	url(r'^problem/preview/', 'problem_preview_request'),
 	url(r'^problem/(?P<problem_id>\d+)/regenerate/$', 'regenerate_problem'),
-	url(r'group/(?P<group_id>\d+)/print/$', 'problems_group_print'),
-	url(r'problem/(?P<problem_id>\d+)/student/$', 'student_problem'),
-	url(r'problem/(?P<problem_id>\d+)/img/student/$', 'student_problem_img')
+	url(r'^group/(?P<group_id>\d+)/print/$', 'problems_group_print'),
+	url(r'^problem/(?P<problem_id>\d+)/student/$', 'student_problem'),
+	url(r'^problem/(?P<problem_id>\d+)/img/student/$', 'student_problem_img'),
+	url(r'^create/new/$', 'create_problems_new'),
+	url(r'^create/new/status/(?P<group_id>\d+)/$', 'group_status', name='group_status')
 )

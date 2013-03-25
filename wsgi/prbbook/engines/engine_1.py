@@ -11,6 +11,7 @@ from random import randint
 class ProblemEngine(Engine):
     name = u"Задача 1. Два квадрата"
     short_name = __name__
+    category = "Геометрические характеристики поперечных сечений"
     description = """
                   Для заданного поперечного сечения определить центр 
                   тяжести, центральные и главные моменты инерции сечения.

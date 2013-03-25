@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="problems" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "problems_nav_tab.html" with menu="create_problems" %}
+			</div>
+			<div class="span10">
+				<legend>Создание группы заданий</legend>
+				<form class="form-horizontal" method="post" action="/problems/create/new/">
+					{% for field in form %}
+						<div class="control-group">
+							<label class="control-label">{{ field.label }}:</label>
+							<div class="controls">
+								{{ field }}
+								{% if field.errors %}
+									<ul class="unstyled">
+									  {% for error in field.errors %}
+								          <li>
+									    	<small class="text-error">{{ error|escape }}</small>
+								          </li>
+									  {% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+					<button type="submit" class="btn btn-primary">Создать</button>
+				</form>
+				<div class="row">
+					{% for group in creating_problems %}
+						<div class="well">
+							<script language="javascript">
+								$(function() {
+									var url = "/problems/create/new/status/{{ group.id }}/";
+
+									var interval = setInterval(function() {
+										$.getJSON(url, function(data) {
+											console.log(data);
+											switch(data.status) {
+												case "PENDING":
+													$("#progress-text_{{ group.id }}").text("Ожидание");
+													break;
+												case "SUCCESS":
+													$("#task_{{ group.id }} div.bar").css("width", "100%");
+													$("#progress-text_{{ group.id }}").text("Завершено");
+													clearInterval(interval);
+													break;
+												case "PROGRESS":
+													$("#task_{{ group.id }} div.bar").css("width", data.process.toString() + "%");
+													$("#progress-text_{{ group.id }}").text("Создано " + data.current.toString() + " из " + data.total.toString());
+													break;
+											}
+										});
+									}, 500);
+								});
+							</script>
+							<div style="text-align: center; font-style: italic; margin-bottom: 5px;">
+								{{ group.name }}
+							</div>
+							<div id="task_{{ group.id }}" class="progress">
+								<div class="bar" style="width: 0%;"></div>
+							</div>
+							<div id="progress-text_{{ group.id }}" style="text-align: center; font-style: italic;">
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -11,6 +11,7 @@ from forms import ProblemsForm
 from itertools import cycle, islice, imap, groupby
 from json import dumps
 from django.template.loader import render_to_string
+import tasks
 
 @login_required(login_url = '/login/')
 @admin_only
@@ -86,6 +87,44 @@ def create_problems(request):
             problem.save()
         group = problems_group
     return render_to_response("create_problems.html", {'form': ProblemsForm(), 'group': group })
+
+@login_required(login_url='/login/')
+@admin_only
+def create_problems_new(request):
+    group = False
+    if request.method == 'POST':
+         # загружаем данные POST из запроса в объект формы
+        form = ProblemsForm(request.POST)
+        # проверяем правильность загруженных данных
+        if not form.is_valid(): # если данные не верны возвращаем форму с сообщением об ошибке
+            return render_to_response("create_problems.html", { 'form': form, 
+                        'creating_problems': ProblemGroup.objects.filter(created = False) })
+        # извлекаем из формы данные в объекты
+        name = form.cleaned_data["name"]
+        engines = form.cleaned_data["engines"]
+        groups = form.cleaned_data["groups"]
+         # если имя группы заданий не задано, то будет использовано значение по умолчанию
+        if not name: name = u"Без названия"
+        # создаем объект группы и сохраняем его
+        problems_group = ProblemGroup(name = name)
+        problems_group.save()
+        # необходимо вызвать поток для создания заданий
+        tasks.create_problems.delay(problems_group, engines, groups)
+    return render_to_response("new_create_problems.html", { 'form': ProblemsForm(), 
+        'creating_problems': ProblemGroup.objects.filter(created = False) })
+
+def group_status(request, group_id):
+    group = get_object_or_404(ProblemGroup, pk = int(group_id))
+    task = tasks.create_problems.AsyncResult(group.task_id)
+    status = task.status
+    # Response object
+    task_status = { 'status': status }
+    # special
+    if status == "PROGRESS":
+        task_status['current'] = task.info['current']
+        task_status['total'] = task.info['total']
+        task_status['process'] = (100.0 / task_status['total']) * task_status['current']
+    return HttpResponse(dumps(task_status), mimetype = 'application/json',)
 
 @login_required(login_url = '/login/')
 @admin_only
