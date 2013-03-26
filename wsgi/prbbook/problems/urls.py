@@ -4,7 +4,6 @@ urlpatterns = patterns('prbbook.problems.views',
 	url(r'^$', 'problems_groups', {'page': 1 }),
 	url(r'^page/(?P<page>\d+)/$', 'problems_groups'),
 	url(r'^group/(?P<group>\d+)/$', 'group_problems_list', name="group_problems_list"),
-	url(r'^create/$', 'create_problems'),
 	url(r'^problem/(?P<problem_id>\d+)/$', 'show_problem'),
 	url(r'^problem/(?P<problem_id>\d+)/img/$', 'problem_img', { 'stage': 1 }),
 	url(r'^problem/(?P<problem_id>\d+)/img/(?P<stage>\d+)/$', 'problem_img'),
@@ -17,6 +16,6 @@ urlpatterns = patterns('prbbook.problems.views',
 	url(r'^group/(?P<group_id>\d+)/print/$', 'problems_group_print'),
 	url(r'^problem/(?P<problem_id>\d+)/student/$', 'student_problem'),
 	url(r'^problem/(?P<problem_id>\d+)/img/student/$', 'student_problem_img'),
-	url(r'^create/new/$', 'create_problems_new'),
-	url(r'^create/new/status/(?P<group_id>\d+)/$', 'group_status', name='group_status')
+	url(r'^create/$', 'create_problems_new', name="create_problems"),
+	url(r'^create/status/(?P<group_id>\d+)/$', 'group_status', name='group_status')
 )

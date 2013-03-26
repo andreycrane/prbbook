@@ -113,6 +113,8 @@ def create_problems_new(request):
     return render_to_response("new_create_problems.html", { 'form': ProblemsForm(), 
         'creating_problems': ProblemGroup.objects.filter(created = False) })
 
+@login_required(login_url = '/login/')
+@admin_only
 def group_status(request, group_id):
     group = get_object_or_404(ProblemGroup, pk = int(group_id))
     task = tasks.create_problems.AsyncResult(group.task_id)

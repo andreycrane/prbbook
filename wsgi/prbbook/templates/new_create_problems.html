@@ -3,7 +3,7 @@
 
 {% block styles %}
 	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
-	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/select_style.less' %}" />
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
 			</div>
 			<div class="span10">
 				<legend>Создание группы заданий</legend>
-				<form class="form-horizontal" method="post" action="/problems/create/new/">
+				<form class="form-horizontal" method="post" action={% url "create_problems" %}>
 					{% for field in form %}
 						<div class="control-group">
 							<label class="control-label">{{ field.label }}:</label>
@@ -40,7 +40,7 @@
 						<div class="well">
 							<script language="javascript">
 								$(function() {
-									var url = "/problems/create/new/status/{{ group.id }}/";
+									var url = '{% url "group_status" group.id %}';
 
 									var interval = setInterval(function() {
 										$.getJSON(url, function(data) {

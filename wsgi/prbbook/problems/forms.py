@@ -12,4 +12,7 @@ class ProblemsForm(forms.Form):
 	groups = forms.ModelMultipleChoiceField(queryset = Group.objects.all(), required = True, 
 										label = u"Кому")
 	engines = forms.MultipleChoiceField(choices = settings.EngineManager.get_subcat_choices(), required = True, 
-									label = u"Задачи")
+									label = u"Задачи", widget = forms.SelectMultiple(attrs = {
+											'size': 10,
+											'class': 'select-input'
+										}))
