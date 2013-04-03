@@ -17,6 +17,8 @@ def create_problems(problem_group, engines, groups):
     users = [profile.user for group in groups for profile in group.userprofile_set.all()]
     # равномерно расределяем задачи между студентами
     engine_names = [engine for engine in islice(cycle(engines), None, len(users))]
+    # словарь уникальности заданий
+    uniq_hash = {}
     for i, (user, engine_name) in enumerate(imap(None, users, engine_names)):
         # извлекаем заданный движок задачи и инстанцируем его
         ProblemEngine = settings.EngineManager.get_engine(engine_name)
@@ -28,9 +30,14 @@ def create_problems(problem_group, engines, groups):
                 engine.adjust()
                 engine.calculate()
             except Exception:
-                pass
+                log.debug("Error while createing problem for %s engine." % ProblemEngine.short_name)
             else:
-                break
+                if uniq_hash.get("%s_%s" % (ProblemEngine.short_name, engine.get_store_str()), False):
+                    continue
+                else:
+                    uniq_hash["%s_%s" % (ProblemEngine.short_name, engine.get_store_str())] = engine.get_store_str()
+                    log.debug(u"Сгенерирована задача: %d" % i)
+                    break
         # создаем объект задания и передаем ему все необходимые данные
         problem = Problem(user = user, problem_engine = engine_name,
             problem_in_params = engine.get_store_str(), # передаем в задание исходные данные 

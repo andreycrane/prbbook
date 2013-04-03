@@ -6,7 +6,9 @@ from math import atan, degrees
 from lib.draw_math import rotate_line
 from lib.engine import Engine
 from json import dumps, loads
-from random import randint
+from random import randint, choice, uniform
+import logging
+import traceback
 
 class ProblemEngine(Engine):
     name = u"Задача 1. Два квадрата"
@@ -32,13 +34,26 @@ class ProblemEngine(Engine):
     # прозводит рандомизацию исходных
     # данных к задаче
     def randomize_in_params(self):
-        b1 = float(randint(8, 12))
-        h1 = float(randint(9, 15))
-        b2 = (randint(2, 8) / 10.0) * b1
-        h2 = (randint(3, 8) / 10.0) * h1
-        z0 = (b1 - b2) * (randint(1, 8) / 10.0)
-        y0 = (h1 - h2) * (randint(1, 8) / 10.0)
-        
+        # генерируем ширину и высоту внешней фигуры
+        # генерируем ширину и высоту внешней фигуры
+        b1 = float(randint(10, 15)) + choice((0.0, 0.5))
+        h1 = float(randint(8, 12)) + choice((0.0, 0.5))
+
+        logging.debug(u"Ширина внешней фигуры: %.3f" % b1)
+        logging.debug(u"Высота внешней фигуры: %.3f" % h1)
+
+        b2 = round(uniform(2.0, (b1 - 2.0)), 2)
+        h2 = round(uniform(2.0, (h1 - 2.0)), 2)
+
+        logging.debug(u"Ширина внутренней фигуры: %.3f" % b2)
+        logging.debug(u"Высота внутренне фигуры: %.3f" % h2)
+
+        y0 = round(uniform(0.7, h1 - 0.6 - h2), 2)
+        z0 = round(uniform(0.7, b1 - 0.6 - b2), 2)
+
+        logging.debug(u"Отступ y0: %.3f" % y0)
+        logging.debug(u"Отступ z0: %.3f" % z0)
+
         self.b1 = b1
         self.h1 = h1
         self.b2 = b2
@@ -48,21 +63,36 @@ class ProblemEngine(Engine):
 
     # производит корректировку параметров задачи
     def adjust(self):
-        if self.z0 < 0.9:
-            if self.b1 - self.b2 <= 1.5:
-                self.b1 += 1.5
-            self.z0 += 0.9
+        (b1, h1, b2, h2, y0, z0) = (self.b1, self.h1,
+                                    self.b2, self.h2,
+                                    self.y0, self.z0)
+        z1 = b1 / 2
+        z2 = z0 + b2/2
+        y1 = h1 / 2
+        y2 = y0 + h2 / 2
 
-        if self.y0 < 0.9:
-            if self.h1 - self.h2 <= 1.5:
-                self.h2 += 1.5
-            self.y0 += 0.9
+        if (b1 - b2 - z0) < 0.5:
+            raise Exception()
 
-        if self.z0 + self.b2 >= self.b1:
-            self.b1 += 1.0
+        if abs(y1 - y2) < 0.9:
+            raise Exception()
 
-        if self.y0 + self.h2 >= self.h1:
-            self.h1 += 1.0
+        A1 = h1 * b1
+        A2 = h2 * b2
+        zc = (A1 * z1 - A2 * z2) / (A1 - A2)
+        yc = (A1 * y1 - A2 * y2) / (A1 - A2)
+
+        if (abs(yc -y1) < 1.0):
+            raise Exception()
+
+        if abs(yc - y2) < 1.0:
+            raise Exception()
+
+        if abs(zc - z1) < 0.7:
+            raise Exception()
+
+        if abs(zc - z2) < 0.7:
+            raise Exception()
         
     # Проверка заданных исходных данных к задаче
     def validate(self):
@@ -174,32 +204,32 @@ class ProblemEngine(Engine):
         # 1. Определим площади простых сечений
         A1 = h1 * b1
         A2 = h2 * b2
-        #print "1) ", A1, A2
+        logging.debug("1) A1=%.3f A2=%.3f" % (A1, A2))
         # 2. Определим координаты центра тяжести каждой из фигур
         z1 = b1 / 2
         z2 = z0 + b2/2
         y1 = h1 / 2
         y2 = y0 + h2 / 2
         (self.z1, self.y1, self.z2, self.y2) = (z1, y1, z2, y2)
-        #print "2) ", z1, y1, z2, y2
+        logging.debug("2) z1=%.3f y1=%.3f z2=%.3f y2=%.3f" % (z1, y1, z2, y2))
         # 3. Определяем координаты центра тяжести фигуры
         zc = (A1 * z1 - A2 * z2) / (A1 - A2)
         yc = (A1 * y1 - A2 * y2) / (A1 - A2)
         (self.zc, self.yc) = (zc, yc)
-        #print "3) ", zc, yc
+        logging.debug("3) zc=%.3f yc=%.3f" % (zc, yc))
         # 4. Определяем моменты инерции простых фигур составляющих сечение
         Jz1 = (b1 * pow(h1, 3)) / 12
         Jz2 = (b2 * pow(h2, 3)) / 12
         Jy1 = (pow(b1, 3) * h1) / 12
         Jy2 = (pow(b2, 3) * h2) / 12
-        #print "4) ", Jz1, Jz2, Jy1, Jy2
+        logging.debug("4) Jz1=%.3f Jz2=%.3f Jy1=%.3f Jy2=%.3f" % (Jz1, Jz2, Jy1, Jy2))
         # 5. Найдем растояние между центральными осями всего
         # сечение и центральными осями простых фигур
         a1 = y1 - yc
         a2 = y2 - yc
         c1 = z1 - zc
         c2 = z2 - zc
-        #print "5) ", a1, a2, c1, c2
+        logging.debug("5) a1=%.3f a2=%.3f c1=%.3f c2=%.3f" % (a1, a2, c1, c2))
         # 6. Найдем моменты инерции простых фигур относительно 
         # центральных осей всего сечения
         Jzci = Jz1 + pow(a1, 2) * A1
@@ -208,12 +238,13 @@ class ProblemEngine(Engine):
         Jycii = Jy2 + pow(c2, 2) * A2
         Jzcyci = a1 * c1 * A1
         Jzcycii = a2 * c2 * A2
-        #print "6) ", Jzci, Jzcii, Jyci, Jycii, Jzcyci, Jzcycii
+        logging.debug("6) Jzci=%.3f, Jzcii=%.3f, Jyci=%.3f, Jycii=%.3f, Jzcyci=%.3f, Jzcycii=%.3f"  % 
+            (Jzci, Jzcii, Jyci, Jycii, Jzcyci, Jzcycii))
         # 7. Найдем центральные моменты инерции всей фигуры
         Jzc = Jzci - Jzcii
         Jyc = Jyci - Jycii
         Jzcyc = Jzcyci - Jzcycii
-        #print "7) ", Jzc, Jyc, Jzcyc
+        logging.debug("7) Jzc=%.3f, Jyc=%.3f, Jzcyc=%.3f" % (Jzc, Jyc, Jzcyc))
         (self.Jzc, self.Jyc, self.Jzcyc) = (Jzc, Jyc, Jzcyc)
         # 8. Найдем главные моменты инерции
         a = ((Jzc + Jyc) / 2)
@@ -227,7 +258,7 @@ class ProblemEngine(Engine):
         alphamax = degrees(atan(tanAmax))
         tanAmin = Jzcyc / (Jyc - Jmin)
         alphamin = degrees(atan(tanAmin))
-        #print "9) ", alphamax, alphamin
+        logging.debug("9) alphamax=%.3f, alphamin=%.3f" % (alphamax, alphamin))
         (self.alphmax, self.alphamin) = (alphamax, alphamin)
 
     # производит отрисовку задачи
@@ -296,28 +327,41 @@ class ProblemEngine(Engine):
 
         return draw
 
-def test(numbers = 1000, show = False):
-    for i in xrange(numbers):
-        engine = ProblemEngine()
-        count = 1
+if __name__ == '__main__':
+    logging.basicConfig(level = logging.WARNING)
+
+    engine = ProblemEngine()
+    uniq_hash = {}
+    all_iters = 0
+    for i in xrange(1000):
+        while True:
+            all_iters += 1
+            try:
+                engine.randomize_in_params()
+                engine.adjust()
+                engine.calculate()
+            except Exception as e:
+                logging.debug(traceback.format_exc())
+            else:
+                #engine.get_image(stage = 2)
+                if uniq_hash.get(engine.get_store_str(), False):
+                    continue
+                else:
+                    uniq_hash[engine.get_store_str()] = engine.get_store_str()
+                    logging.warning(u"Сгенерирована задача: %d" % i)
+                    break
+
+    logging.warning(u"Количество полученных уникальных: %d" % len(uniq_hash))
+    logging.warning(u"Всего было выполнено итераций: %d" % all_iters)
+
+    for i in xrange(1):
         while True:
             try:
                 engine.randomize_in_params()
                 engine.adjust()
-                engine.validate()
                 engine.calculate()
-                if show: engine.get_image(stage = 2).show()
             except Exception as e:
-                pass
+                logging.debug(traceback.format_exc())
             else:
+                engine.get_image(stage = 2).show()
                 break
-            count += 1
-        #print "Попытка #%d удалась с %d раза." % (i, count)
-        if count >= 5:
-            print ("*****Более 5 раз - %d*****" % count)
-
-if __name__ == '__main__':
-    import timeit
-    print max(timeit.repeat(setup = "from __main__ import test", stmt = "test()", repeat = 100, number = 1))
-    print "**Test**"
-    test(numbers = 1, show = True)

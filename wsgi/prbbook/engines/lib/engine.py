@@ -2,6 +2,7 @@
 
 from abc import ABCMeta, abstractmethod
 from draw import DesignDraw
+import logging
 
 class Engine(object):
 	__metaclass__ = ABCMeta
@@ -15,7 +16,7 @@ class Engine(object):
 		draw = self.draw(draw, stage)
 		draw.Crop()
 		(im_width, im_height) = draw.Size()
-		print im_width, im_height
+		logging.debug("Real image width=%d height=%d with alpha=%d" % (im_width, im_height, draw.alpha))
 
 		alpha_width = int((width * draw.alpha) / im_width)
 		alpha_height = int((height * draw.alpha) / im_height)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from engine import Engine
+import logging
 # менеджер движков
 class EngineManager:
 	"""
@@ -35,7 +36,7 @@ class EngineManager:
 			if not cats.get(engine.category, False):
 				cats[engine.category] = []
 			cats[engine.category].append((engine.short_name, engine.name))
-		print cats
+		logging.debug("Subcat choices: %s" % cats)
 		return [[category, cats[category]] for category in cats]
 
 	@classmethod

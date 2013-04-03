@@ -113,13 +113,15 @@
 									{% for param in in_params %}
 										{% for group, params in param.items %}
 											<p class="params-group">{{ group }}:</p>
-												{% for description, value, name in params %}
-												<div class="control-group">
-													<label class="control-label" for="input">{{ description }}</label>
-													<div class="controls">
-														<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/>
-													</div>
-												</div>
+												{% for description, value, name, noedit in params %}
+													{% if not noedit %}
+														<div class="control-group">
+															<label class="control-label" for="input">{{ description }}</label>
+															<div class="controls">
+																<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/>
+															</div>
+														</div>
+													{% endif %}
 												{% endfor %}
 										{% endfor %}
 									{% endfor %}
