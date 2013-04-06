@@ -16,9 +16,6 @@ class DesignDraw:
         self.font = ImageFont.truetype(dirname(abspath(__file__)) + '/GOST_A.TTF', 17)
         self.alpha = alpha
 
-        self.short_name = "Hello"
-        self.description = "Hello"
-
     # функция преобразующая сантиметры в пиксели
     def sm2px(self, sm):
         return (sm * self.alpha)
