@@ -28,9 +28,6 @@ class ProblemEngine(Engine):
                   """
     stage_count = 2
 
-    def __init__(self):
-        pass
-
     def adjust(self):
         (b1, h1, b2, h2, y0, z0) = (self.b1, self.h1,
                                     self.b2, self.h2,

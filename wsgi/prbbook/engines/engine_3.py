@@ -13,7 +13,6 @@ from lib.draw_math import rotate_line
 def round_list(lst):
     return [round(item, 3) for item in lst]
 
-
 class ProblemEngine(Engine):
     name = "Задача 3. Квадрат с вырезом (сверху)"
     short_name = __name__
@@ -34,7 +33,27 @@ class ProblemEngine(Engine):
 
     def randomize_in_params(self):
         "Генерация исходных данных к задаче."
-        pass
+        # генерируем ширину и высоту внешней фигуры
+        b1 = float(randint(10, 15)) + choice((0.0, 0.5))
+        h1 = float(randint(8, 12)) + choice((0.0, 0.5))
+
+        logging.debug(u"Ширина внешней фигуры: %.3f" % b1)
+        logging.debug(u"Высота внешней фигуры: %.3f" % h1)
+
+        # генерируем высоту выреза
+        # минимум 3.0 см максимум h1 - 1.0
+        h2 = round(uniform(3.5, h1 - 1.0), 2)
+        logging.debug(u"Высота выреза: %.3f" % h2)
+        # генерируем ширину выреза
+        # минимум 3.0 см максимум b1 - 2.0
+        b2 = round(uniform(3.0, (b1 - 2.0)), 2)
+        logging.debug(u"Ширина выреза: %.3f" % b2)
+        # генерируем отступ z0
+        # минимум 0.7 максимум b1 - b2 - 0.6
+        z0 = round(uniform(0.9, (b1 - b2 - 0.7)), 2)
+        logging.debug(u"Отступ выреза: %.3f" % z0)
+
+        (self.b1, self.h1, self.b2, self.h2, self.z0) = (b1, h1, b2, h2, z0)
 
     def load_preview_params(self):
         "Загрузка исходных данных для предварительного просмотра."
@@ -52,11 +71,46 @@ class ProblemEngine(Engine):
         имеется возможность их исправить - данные исправляются,
         в отсутствие возможности - даннные отбрасываются.
         """
-        pass
+        (b1, h1, b2, h2, z0) = (self.b1, self.h1, self.b2, self.h2, self.z0)
+
+        if (b1 - (z0 + b2)) < 0.5:
+            raise Exception(u"Расстояние между вырезом и краем внешней фигуры меньше 0.5")
+        if (h1 - h2) < 0.5:
+            raise Exception(u"Расстояние между вырезом и нижним краем вншней фигуры меньше 0.5")
+
+        A1 = h1 * b1
+        A2 = h2 * b2
+ 
+        z1 = b1 / 2.0
+        z2 = z0 + (b2 / 2.0)
+        y1 = h1 / 2.0
+        y2 = h1 - h2 + (h2 / 2.0)
+
+        if abs(y1 - y2) < 1.0:
+            raise Exception(u"Растояние между центрами тяжести простых фигур по y слишком мало")
+        if abs(z1 - z2) < 1.0:
+            raise Exception(u"Растояние между центрами тяжести простых фигур по z слишком мало")
+
+        zc = (A1 * z1 - A2 * z2) / (A1 - A2)
+        yc = (A1 * y1 - A2 * y2) / (A1 - A2)
+
+        if abs(zc - z1) < 1.0:
+            raise Exception(u"Растояние между центрам тяжести простой фигуры и всей фигуры по z слишком мало")
+        if abs(zc - z2) < 1.0:
+            raise Exception(u"Растояние между центрам тяжести выреза и всей фигуры по z слишком мало")
+        if abs(yc - y1) < 1.0:
+            raise Exception(u"Растояние между центрам тяжести простой фигуры и всей фигуры по y слишком мало")
+        if abs(yc - y2) < 1.0:
+            raise Exception(u"Растояние между центрам тяжести выреза и всей фигуры по y слишком мало")
 
     def validate(self):
         "Метод валидации полученных исходных данных."
-        pass
+        (h1, b1, h2, b2, z0) = (self.h1, self.b1, self.h2, self.b2, self.z0)
+
+        if (h1 - h2) <= 0.0:
+            raise Exception(u"Высота выреза должна быть меньше высоты фигуры.")
+        if (b1 - (b2 + z0)) <= 0.0:
+            raise Exception(u"Ширина выреза + отступ слишком большие для данной фигуры.")
 
     def get_store_str(self):
         """
@@ -307,11 +361,39 @@ class ProblemEngine(Engine):
         return draw
 
 if __name__ == "__main__":
-    logging.basicConfig(level = logging.DEBUG)
+    logging.basicConfig(level = logging.WARNING)
 
     engine = ProblemEngine()
-    engine.load_preview_params()
-    engine.calculate()
-    engine.get_image(stage = 2).show()
-    engine.get_in_params()
-    engine.get_out_params()
+    uniq_hash = {}
+    all_iters = 0
+    for i in xrange(1000):
+        while True:
+            all_iters += 1
+            try:
+                engine.randomize_in_params()
+                engine.adjust()
+                engine.calculate()
+            except Exception as e:
+                logging.debug(traceback.format_exc())
+            else:
+                #engine.get_image(stage = 2)
+                if uniq_hash.get(engine.get_store_str(), False):
+                    continue
+                else:
+                    uniq_hash[engine.get_store_str()] = engine.get_store_str()
+                    logging.warning(u"Сгенерирована задача: %d" % i)
+                    break
+
+    logging.warning(u"Количество полученных уникальных: %d" % len(uniq_hash))
+    logging.warning(u"Всего было выполнено итераций: %d" % all_iters)
+
+    while True:
+        try:
+            engine.randomize_in_params()
+            engine.adjust()
+            engine.calculate()
+        except Exception as e:
+            logging.debug(traceback.format_exc())
+        else:
+            engine.get_image(stage = 2).show()
+            break

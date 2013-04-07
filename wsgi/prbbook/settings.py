@@ -167,9 +167,11 @@ AUTH_PROFILE_MODULE = 'students.UserProfile'
 from engines.lib.manager import EngineManager
 from engines import engine_1
 from engines import engine_2
+from engines import engine_3
 
 EngineManager.add_engine(engine_1.ProblemEngine)
 EngineManager.add_engine(engine_2.ProblemEngine)
+EngineManager.add_engine(engine_3.ProblemEngine)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
