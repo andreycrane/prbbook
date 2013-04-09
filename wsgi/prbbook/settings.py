@@ -168,10 +168,12 @@ from engines.lib.manager import EngineManager
 from engines import engine_1
 from engines import engine_2
 from engines import engine_3
+from engines import engine_4
 
 EngineManager.add_engine(engine_1.ProblemEngine)
 EngineManager.add_engine(engine_2.ProblemEngine)
 EngineManager.add_engine(engine_3.ProblemEngine)
+EngineManager.add_engine(engine_4.ProblemEngine)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
