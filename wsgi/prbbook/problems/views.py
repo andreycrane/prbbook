@@ -283,6 +283,24 @@ def problems_group_print(request, group_id):
 
 
 @login_required(login_url = '/login/')
+def student_problem_preview(request, problem_id):
+    # получаем объекта задания только для данного студента по данному ПК
+    problem = get_object_or_404(Problem, pk = problem_id, user = request.user)
+    # создаем хэш-объект задания
+    problem_dict = {}
+    problem_dict["object"] = problem
+    # извлекаем движок
+    ProblemEngine = settings.EngineManager.get_engine(problem.problem_engine)
+    problem_dict["engine"] = ProblemEngine
+    # инстанцируем движок и загружаем в него данные
+    engine = ProblemEngine()
+    engine.load_store_str(problem.problem_in_params)
+    # получаем исходные данные к задаче
+    problem_dict["in_params"] = engine.get_in_params()
+    return render_to_response("student_problem_print.html", { 'problem': problem_dict })
+
+
+@login_required(login_url = '/login/')
 def student_problem(request, problem_id):
     # излекаем задание с заданным id и принадлежащие данному студенту 
     problem = get_object_or_404(Problem, pk = problem_id, user = request.user)

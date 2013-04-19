@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_list.less' %}" />
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="page">
+				<p>{{ problem.object.group.name }} - {{ problem.object.user.first_name }} {{ problem.object.user.userprofile.group }}</p>
+					{% autoescape off %}
+						<p>{{ problem.engine.name }}</p>
+						<p>{{ problem.engine.description }}</p>
+					{% endautoescape %}
+					<div class="left-side">
+						<p class="lead">Исходные данные к задаче:</p>
+						<ul class="unstyled params-list">
+							{% autoescape off %}
+								{% for param in problem.in_params %}
+									<li>
+										{% for key, value in param.items %}
+											<li>
+												{{ key }}:
+													{% for name, zn in value %}
+														<span>{{ name|lower }}={{ zn|floatformat:"-2" }}</span>{% if forloop.last %}.{% else %},&nbsp;{% endif %}
+													{% endfor %}
+											</li>
+										{% endfor %}
+									</li>
+								{% endfor %}
+							{% endautoescape %}
+						</ul>
+					</div>
+					<div class="right-side">
+						<figure class="engine-image">
+							<p>
+								<img src="/problems/problem/{{ problem.object.id }}/img/student/" />
+							</p>
+							<figurecaption>
+								Рисунок к заданию
+							</figurecaption>
+						</figure>
+					</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

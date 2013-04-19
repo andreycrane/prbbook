@@ -96,7 +96,15 @@ class ProblemEngine(Engine):
             raise Exception()
 
     def validate(self):
-        pass
+        # экспортируем переменные экземпляра (исходные данные)
+        # к задаче в локальное пространство имен метода
+        (h1, b1, h2, b2, z0, y0) = (self.h1, self.b1,
+                                    self.h2, self.b2,
+                                    self.z0, self.y0)
+        if h1 <= (h2 + y0):
+            raise Exception(u"Высота треугольника и/или координата y0 заданы некоректно")
+        if b1 <= (b2 + z0):
+            raise Exception(u"Ширина треугольника и/или координата z0 заданы некоректно")
 
     def get_store_str(self):
         dump_obj = {
@@ -109,7 +117,7 @@ class ProblemEngine(Engine):
         }
         return dumps(dump_obj)
 
-    def load_store_str(self, sore_str):
+    def load_store_str(self, store_str):
         loads_obj = loads(store_str)
         self.b1 = float(loads_obj['b1'])
         self.h1 = float(loads_obj['h1'])
@@ -135,7 +143,8 @@ class ProblemEngine(Engine):
             },
             {'Координата треугольника':
                 [
-                    ('z<sub>0</sub>',self.z0, 'z0')
+                    ('z<sub>0</sub>',self.z0, 'z0'),
+                    ('y<sub>0</sub>', self.y0, 'y0')
                 ]
             }
         ]

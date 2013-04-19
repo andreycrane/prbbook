@@ -17,5 +17,6 @@ urlpatterns = patterns('prbbook.problems.views',
 	url(r'^problem/(?P<problem_id>\d+)/student/$', 'student_problem'),
 	url(r'^problem/(?P<problem_id>\d+)/img/student/$', 'student_problem_img'),
 	url(r'^create/$', 'create_problems_new', name="create_problems"),
-	url(r'^create/status/(?P<group_id>\d+)/$', 'group_status', name='group_status')
+	url(r'^create/status/(?P<group_id>\d+)/$', 'group_status', name='group_status'),
+	url(r'^problem/(?P<problem_id>\d+)/student/print/$', 'student_problem_preview', name='student_problem_print')
 )
