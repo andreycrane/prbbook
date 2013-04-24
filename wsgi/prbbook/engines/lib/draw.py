@@ -164,6 +164,12 @@ class DesignDraw:
         (textw, texth) = self.font.getsize(text)
         self.draw.text((x + 2, y - (texth / 2.0)), text, font=self.font, fill="black")
 
+    def TopAlignText(self, text, x, y):
+        [x, y] =  [self.sm2px(x), self.sm2px(y)]
+        [x, y] = self.dec2screen(x, y)
+        (textw, texth) = self.font.getsize(text)
+        self.draw.text((x - (textw / 2.0), y - texth), text, font=self.font, fill="black")
+
     def Polygon(self, xy):
         screen_xy = [self.dec2screen(self.sm2px(x), self.sm2px(y)) for x, y in xy]
         self.draw.polygon(screen_xy, outline="black")

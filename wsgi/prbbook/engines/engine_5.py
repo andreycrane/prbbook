@@ -133,6 +133,11 @@ class ProblemEngine(Engine):
         draw.Line(x + z0 + b2, y + h1, x + z0 + b2, y + h1 - 1)
         draw.Line2FillArrow(x + z0, y + h1 - 0.5,  x + z0 + b2, y + h1 - 0.5)
         draw.BottomAlignText("b2", x + z0 + (b2 / 2.0), y + h1 - 0.5)
+        # рисуем координату z0
+        draw.Line(x, y + h1, x, y + h1 + 1)
+        draw.Line(x + z0, y + h1, x + z0, y + h1 + 1)
+        draw.Line2FillArrow(x, y + h1 + 0.5, x + z0, y + h1 + 0.5)
+        draw.TopAlignText("z0", x + (z0 / 2.0), y + h1 + 0.5)
         # рисуем примитивы второго уровня отрисовки
         if stage >= 2:
             # рисуем координаты центра тяжести каждой из простых фигур
