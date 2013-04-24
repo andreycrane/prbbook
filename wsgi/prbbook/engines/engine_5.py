@@ -11,6 +11,8 @@ from lib.engine import Engine
 from lib.draw_math import rotate_line
 
 class ProblemEngine(Engine):
+    name = u"Задача 5. Прямоугольник и треугольник (сверху)."
+    
     def randomize_in_params(self):
         pass
 
