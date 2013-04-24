@@ -240,7 +240,7 @@ class ProblemEngine(Engine):
         Jmax = ((Jzc + Jyc) / 2.0) + 0.5 * (((Jzc - Jyc) ** 2 + 4 * Jzcyc ** 2) ** 0.5)
         Jmin = ((Jzc + Jyc) / 2.0) - 0.5 * (((Jzc - Jyc) ** 2 + 4 * Jzcyc ** 2) ** 0.5)
         logging.debug("8: Jmax=%.3f Jmin=%.3f" % (Jmax, Jmin))
-         # 9. Найдем положение главных осей
+        # 9. Найдем положение главных осей
         tanAmax = Jzcyc / (Jyc - Jmax)
         Amax = degrees(atan(tanAmax))
         tanAmin = Jzcyc / (Jyc - Jmin)
