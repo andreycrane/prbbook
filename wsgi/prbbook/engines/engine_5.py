@@ -12,6 +12,21 @@ from lib.draw_math import rotate_line
 
 class ProblemEngine(Engine):
     name = u"Задача 5. Прямоугольник и треугольник (сверху)."
+    short_name = __name__
+    category = "Геометрические характеристики поперечных сечений"
+    description = """
+                  Для заданного поперечного сечения определить центр 
+                  тяжести, центральные и главные моменты инерции сечения.
+                  <br />
+                  Порядок расчета:
+                  <ol>
+                    <li>Найти центр тяжести сечения</li>
+                    <li>Найти центральные моменты инерции сечения</li>
+                    <li>Найти главные моменты инерции сечения</li>
+                    <li>Построить центральные оси сечения</li>
+                  </ol>
+                  """
+    stage_count = 2
 
     def randomize_in_params(self):
         pass
@@ -39,10 +54,59 @@ class ProblemEngine(Engine):
         pass
 
     def get_in_params(self):
-        pass
+        params = [
+            {'Прямоугольник':
+                [
+                    ('Ширина b<sub>1</sub>',self.b1, 'b1'),
+                    ('Высота h<sub>1</sub>',self.h1, 'h1')
+                ]
+            },
+            {'Треугольник (равнобедренный)':
+                [
+                    ('Основание b<sub>2</sub>',self.b2, 'b2'),
+                    ('Высота h<sub>2</sub>',self.h2, 'h2')
+                ]
+
+            },
+            {'Координата треугольника':
+                [
+                    ('z<sub>0</sub>',self.z0, 'z0'),
+                ]
+            }
+        ]
+        return params
 
     def get_out_params(self):
-        pass
+        params = [
+            {'Координаты центра тяжести каждой из простых фигур':
+                [
+                    ('z<sub>1</sub>',self.z1),
+                    ('z<sub>2</sub>',self.z2),
+                    ('y<sub>1</sub>',self.y1),
+                    ('y<sub>2</sub>',self.y2)
+                ]
+            },
+            {'Координаты центра тежести всей фигуры':
+                [
+                    ('z<sub>c</sub>',self.zc),
+                    ('y<sub>c</sub>',self.yc)
+                ]
+            },
+            {'Центральные моменты инерции всей фигуры':
+                [
+                    ('J<sub>zc</sub>',self.Jzc),
+                    ('J<sub>yc</sub>',self.Jyc),
+                    ('J<sub>zcyc</sub>',self.Jzcyc)
+                ]
+            },
+            {'Положение главных осей':
+                [
+                    ('&alpha;<sub>max</sub>', self.alphamax),
+                    ('&alpha;<sub>min</sub>', self.alphamin)
+                ]
+            }
+        ]
+        return params
 
     def calculate(self):
         (h1, b1, h2, b2, z0, y0) = (self.h1, self.b1, self.h2, 
@@ -176,3 +240,5 @@ if __name__ == "__main__":
     engine.load_preview_params()
     engine.calculate()
     engine.get_image(stage = 2).show()
+    engine.get_in_params()
+    engine.get_out_params()

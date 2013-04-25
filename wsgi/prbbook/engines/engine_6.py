@@ -12,6 +12,21 @@ from lib.draw_math import rotate_line
 
 class ProblemEngine(Engine):
     name = u"Задача 6. Два прямоугольника (горизонтально)."
+    short_name = __name__
+    category = "Геометрические характеристики поперечных сечений"
+    description = """
+                  Для заданного поперечного сечения определить центр 
+                  тяжести, центральные и главные моменты инерции сечения.
+                  <br />
+                  Порядок расчета:
+                  <ol>
+                    <li>Найти центр тяжести сечения</li>
+                    <li>Найти центральные моменты инерции сечения</li>
+                    <li>Найти главные моменты инерции сечения</li>
+                    <li>Построить центральные оси сечения</li>
+                  </ol>
+                  """
+    stage_count = 2
 
     def randomize_in_params(self):
         pass
@@ -39,10 +54,59 @@ class ProblemEngine(Engine):
         pass
 
     def get_in_params(self):
-        pass
+        params = [
+            {'Прямоугольник слева':
+                [
+                    ('Ширина b<sub>1</sub>',self.b1, 'b1'),
+                    ('Высота h<sub>1</sub>',self.h1, 'h1')
+                ]
+            },
+            {'Прямоугольник справа':
+                [
+                    ('Ширина b<sub>2</sub>',self.b2, 'b2'),
+                    ('Высота h<sub>2</sub>',self.h2, 'h2')
+                ]
+
+            },
+            {'Координата прямоугольника справа':
+                [
+                    ('y<sub>0</sub>',self.y0, 'y0'),
+                ]
+            }
+        ]
+        return params
 
     def get_out_params(self):
-        pass
+        params = [
+            {'Координаты центра тяжести каждой из простых фигур':
+                [
+                    ('z<sub>1</sub>',self.z1),
+                    ('z<sub>2</sub>',self.z2),
+                    ('y<sub>1</sub>',self.y1),
+                    ('y<sub>2</sub>',self.y2)
+                ]
+            },
+            {'Координаты центра тежести фигуры':
+                [
+                    ('z<sub>c</sub>',self.zc),
+                    ('y<sub>c</sub>',self.yc)
+                ]
+            },
+            {'Центральные моменты инерции всей фигуры':
+                [
+                    ('J<sub>zc</sub>',self.Jzc),
+                    ('J<sub>yc</sub>',self.Jyc),
+                    ('J<sub>zcyc</sub>',self.Jzcyc)
+                ]
+            },
+            {'Положение главных осей':
+                [
+                    ('&alpha;<sub>max</sub>', self.alphamax),
+                    ('&alpha;<sub>min</sub>', self.alphamin)
+                ]
+            }
+        ]
+        return params
 
     def calculate(self):
         # экспортируем переменные экземпляра (исходные данные)
@@ -112,7 +176,7 @@ class ProblemEngine(Engine):
         (self.alphamax, self.alphamin) = (Amax, Amin)
         logging.debug("9: tanAmax=%.3f Amax=%.3f tanAmin=%.3f Amin=%.3f" % 
                           (tanAmax, Amax, tanAmin, Amin))
-        
+
     def draw(self, draw, stage):
         (x, y) = (5, 5)
         (b1, h1, b2, h2, y0) = (self.b1,
@@ -168,3 +232,5 @@ if __name__ == "__main__":
     engine.load_preview_params()
     engine.calculate()
     engine.get_image(stage = 2).show()
+    engine.get_in_params()
+    engine.get_out_params()
