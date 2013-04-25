@@ -112,6 +112,7 @@ class ProblemEngine(Engine):
         (self.alphamax, self.alphamin) = (Amax, Amin)
         logging.debug("9: tanAmax=%.3f Amax=%.3f tanAmin=%.3f Amin=%.3f" % 
                           (tanAmax, Amax, tanAmin, Amin))
+        
     def draw(self, draw, stage):
         (x, y) = (5, 5)
         (b1, h1, b2, h2, y0) = (self.b1,
