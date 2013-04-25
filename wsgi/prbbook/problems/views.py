@@ -202,6 +202,24 @@ def problem_preview_img(request, problem_id, in_params, stage):
         response = HttpResponse(mimetype = 'text/html', status = 500)
     return response
 
+def engine_img_request(request, engine_name, in_params, stage):
+    # извлекаем класс движка задачи для данного задания и интстанцируем его
+    ProblemEngine = settings.EngineManager.get_engine(problem.problem_engine)
+    engine = ProblemEngine()
+    # загружаем данные задачи в движок из задания, производим расчет
+    # и извлекаем входные и выходные данные
+    response = None
+    try:
+        engine.load_store_str(in_params)
+        engine.calculate()
+        img = engine.get_image(stage = int(stage))
+        # выполняем сериализацию изображения в объект ответа
+        response = HttpResponse(mimetype = 'image/png')
+        img.save(response, 'PNG')
+    except Exception as e:
+        response = HttpResponse(mimetype = 'text/html', status = 500)
+    return response
+
 @login_required(login_url = '/login/')
 @admin_only
 def problem_preview_request(request):

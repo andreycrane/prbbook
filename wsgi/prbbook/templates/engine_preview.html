@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load webdesign %}
+{% load staticfiles %}
 
 {% block title %}
 	{{ prb.name }}
 {% endblock %}
 
 {% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/forms.less' %}" />
 	<style>
 		.image {
 			margin: 0 auto;
@@ -69,10 +71,10 @@
 					<div class="span7">
 						<figure class="image">
 							<p>
-								<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+								<img src="/engine/preview/{{ prb.short_name}}/img/1/" />
 							</p>
 							<figurecaption>
-								Рисунок для сверки
+								Рисунок к заданию
 							</figurecaption>
 						</figure>
 					</div>
@@ -112,7 +114,76 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="tab1">
-					<p>Редактирование</p>
+					<div class="span5">
+			    		<p class="lead">Форма исходных данных:</p>
+				    	<form id="edit_form" class="form form-horizontal" method="post">
+							{% autoescape off %}
+								{% for param in in_params %}
+									{% for group, params in param.items %}
+										<p class="params-group">{{ group }}:</p>
+											{% for description, value, name, noedit in params %}
+												{% if not noedit %}
+													<div class="control-group">
+														<label class="control-label" for="input">{{ description }}</label>
+														<div class="controls">
+															<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/>
+														</div>
+													</div>
+												{% endif %}
+											{% endfor %}
+									{% endfor %}
+								{% endfor %}
+							{% endautoescape %}
+							<button id="preview" type="button" class="btn">Предосмотр</button>
+							<button id="save" type="submit" class="btn btn-primary">Сохранить</button>
+				    	</form>
+				    </div>
+				    <div class="span7">
+						<figure class="image">
+							<p>
+								<img src="/engine/preview/{{ prb.short_name}}/img/1/" />
+							</p>
+							<figurecaption>
+								Рисунок к заданию
+							</figurecaption>
+						</figure>
+					</div>
+					<div class="span12">
+						<hr />
+					</div>
+					<div class="span5">
+						<p class="lead">Расчитанные данные задачи:</p>
+						<div id="out_params">
+							<ul class="unstyled">
+								{% autoescape off %}
+									{% for param in out_params %}
+										<li>
+											{% for key, value in param.items %}
+												<li>
+													{{ key }}:
+													<ul>
+														{% for name, zn in value %}
+														<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+														{% endfor %}
+													</ul>
+												</li>
+											{% endfor %}
+										</li>
+									{% endfor %}
+								{% endautoescape %}
+							</ul>
+						</div>
+					</div>
+					<div class="span7">
+						<figure class="image">
+							<p>
+								<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+							</p>
+							<figurecaption>
+								Рисунок для сверки
+							</figurecaption>
+						</figure>
+					</div>
 				</div>
 			</div>
 		</div>
