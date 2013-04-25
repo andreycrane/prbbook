@@ -12,7 +12,7 @@ from lib.draw_math import rotate_line
 
 class ProblemEngine(Engine):
     name = u"Задача 5. Прямоугольник и треугольник (сверху)."
-    
+
     def randomize_in_params(self):
         pass
 
@@ -160,11 +160,11 @@ class ProblemEngine(Engine):
             draw.Text("C", x + zc, y + yc)
             # рисуем положение главных осей
             (alphamax, alphamin) = (self.alphamax, self.alphamin)
-            (Xv, Yv) = rotate_line(x + zc, y + yc, x + b1 + 2, y + yc, alphamin)
+            (Xv, Yv) = rotate_line(x + zc, y + yc, x + b1 + 5, y + yc, alphamin)
             draw.LineFillArrow(x + zc, y + yc, Xv, Yv, headlen = 7, headwid = 6)
             draw.Text("V", Xv, Yv)
             logging.debug("Xv=%.3f Yv=%.3f" % (Xv, Yv))
-            (Xu, Yu) = rotate_line(x + zc, y + yc, x + b1 + 2, y + yc, alphamax)
+            (Xu, Yu) = rotate_line(x + zc, y + yc, x + b1 + 5, y + yc, alphamax)
             draw.LineFillArrow(x + zc, y + yc, Xu, Yu, headlen = 7, headwid = 6)
             draw.Text("U", Xu, Yu)
         return draw
