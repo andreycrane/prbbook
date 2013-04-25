@@ -36,73 +36,85 @@
 		{% autoescape off %}
 			<p>{{ prb.description }}</p>
 		{% endautoescape %}
-		<hr />
-		<div class="span5">
-			<p class="lead">Исходные данные к задаче:</p>
-			<ul class="unstyled">
-				{% autoescape off %}
-					{% for param in in_params %}
-						<li>
-							{% for key, value in param.items %}
-								<li>
-									{{ key }}:
-									<ul>
-										{% for name, zn in value %}
-										<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
-										{% endfor %}
-									</ul>
-								</li>
-							{% endfor %}
-						</li>
-					{% endfor %}
-				{% endautoescape %}
-			</ul>
-		</div>
-		<div class="span7">
-			<figure class="image">
-				<p>
-					<img src="/engine/preview/{{ prb.short_name }}/img/1/" />
-				</p>
-				<figurecaption>
-					Рисунок к заданию
-				</figurecaption>
-			</figure>
-		</div>
 	</div>
 	<div class="row">
-		<hr />
-	</div>
-	<div class="row">
-		<div class="span5">
-			<p class="lead">Расчитанные данные задачи:</p>
-			<ul class="unstyled">
-				{% autoescape off %}
-					{% for param in out_params %}
-						<li>
-							{% for key, value in param.items %}
-								<li>
-									{{ key }}:
-									<ul>
-										{% for name, zn in value %}
-										<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
-										{% endfor %}
-									</ul>
-								</li>
-							{% endfor %}
-						</li>
-					{% endfor %}
-				{% endautoescape %}
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="pull-right"><a href="#tab1" data-toggle="tab">Редактирование</a></li>
+				<li class="active pull-right"><a href="#tab2" data-toggle="tab">Просмотр</a></li>
 			</ul>
-		</div>
-		<div class="span7">
-			<figure class="image">
-				<p>
-					<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
-				</p>
-				<figurecaption>
-					Рисунок для сверки
-				</figurecaption>
-			</figure>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab2">
+					<div class="span5">
+						<p class="lead">Исходные данные к задаче:</p>
+						<ul class="unstyled">
+							{% autoescape off %}
+								{% for param in in_params %}
+									<li>
+										{% for key, value in param.items %}
+											<li>
+												{{ key }}:
+												<ul>
+													{% for name, zn in value %}
+													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{% endfor %}
+									</li>
+								{% endfor %}
+							{% endautoescape %}
+						</ul>
+					</div>
+					<div class="span7">
+						<figure class="image">
+							<p>
+								<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+							</p>
+							<figurecaption>
+								Рисунок для сверки
+							</figurecaption>
+						</figure>
+					</div>
+					<div class="span12">
+						<hr />
+					</div>
+					<div class="span5">
+						<p class="lead">Расчитанные данные задачи:</p>
+						<ul class="unstyled">
+							{% autoescape off %}
+								{% for param in out_params %}
+									<li>
+										{% for key, value in param.items %}
+											<li>
+												{{ key }}:
+												<ul>
+													{% for name, zn in value %}
+													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{% endfor %}
+									</li>
+								{% endfor %}
+							{% endautoescape %}
+						</ul>
+					</div>
+					<div class="span7">
+						<figure class="image">
+							<p>
+								<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+							</p>
+							<figurecaption>
+								Рисунок для сверки
+							</figurecaption>
+						</figure>
+					</div>
+				</div>
+				<div class="tab-pane" id="tab1">
+					<p>Редактирование</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
