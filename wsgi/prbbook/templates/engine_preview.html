@@ -28,6 +28,10 @@
 	</style>
 {% endblock %}
 
+{% block scripts %}
+	<script src="{% static 'js/edit.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <div class="container">
 	<div class="row">
@@ -116,7 +120,7 @@
 				<div class="tab-pane" id="tab1">
 					<div class="span5">
 			    		<p class="lead">Форма исходных данных:</p>
-				    	<form id="edit_form" class="form form-horizontal" method="post">
+				    	<form id="edit_form" class="form form-horizontal" method="post" engine="{{ prb.short_name }}" stages="{{ prb.stage_count }}">
 							{% autoescape off %}
 								{% for param in in_params %}
 									{% for group, params in param.items %}
@@ -135,13 +139,12 @@
 								{% endfor %}
 							{% endautoescape %}
 							<button id="preview" type="button" class="btn">Предосмотр</button>
-							<button id="save" type="submit" class="btn btn-primary">Сохранить</button>
 				    	</form>
 				    </div>
 				    <div class="span7">
 						<figure class="image">
 							<p>
-								<img src="/engine/preview/{{ prb.short_name}}/img/1/" />
+								<img id="first_image" src="/engine/preview/{{ prb.short_name}}/img/1/" />
 							</p>
 							<figurecaption>
 								Рисунок к заданию
@@ -177,7 +180,7 @@
 					<div class="span7">
 						<figure class="image">
 							<p>
-								<img src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
+								<img id="second_image" src="/engine/preview/{{ prb.short_name}}/img/{{ prb.stage_count }}/" />
 							</p>
 							<figurecaption>
 								Рисунок для сверки
@@ -188,5 +191,14 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id="error-modal" class="modal hide fade" tabindex="-1">
+  	<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    	<h3>Ошибка в исходных данных</h3>
+  	</div>
+  	<div class="modal-body">
+    	<p id="error-text"></p>
+  	</div>
 </div>
 {% endblock %}

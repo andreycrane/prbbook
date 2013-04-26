@@ -202,9 +202,11 @@ def problem_preview_img(request, problem_id, in_params, stage):
         response = HttpResponse(mimetype = 'text/html', status = 500)
     return response
 
+@login_required(login_url = '/login/')
+@admin_only
 def engine_img_request(request, engine_name, in_params, stage):
     # извлекаем класс движка задачи для данного задания и интстанцируем его
-    ProblemEngine = settings.EngineManager.get_engine(problem.problem_engine)
+    ProblemEngine = settings.EngineManager.get_engine(engine_name)
     engine = ProblemEngine()
     # загружаем данные задачи в движок из задания, производим расчет
     # и извлекаем входные и выходные данные
@@ -219,6 +221,35 @@ def engine_img_request(request, engine_name, in_params, stage):
     except Exception as e:
         response = HttpResponse(mimetype = 'text/html', status = 500)
     return response
+
+@login_required(login_url = '/login/')
+@admin_only
+def engine_preview_request(request):
+    # извлекаем необходимые параметры из запросы
+    try:
+        in_params = request.GET["in_params"]
+        engine_name = request.GET["engine"]
+    except:
+        return HttpResponseNotFound() # если параметры отсутсвуют -> 404
+    # извлекаем класс движка задачи для данного задания и интстанцируем его
+    ProblemEngine = settings.EngineManager.get_engine(engine_name)
+    engine = ProblemEngine()
+    # создаем JSON объект ответа
+    resp = { 'status': 'success', 'body': '' }
+    try:
+         # загружаем данные задачи в движок из запроса
+        engine.load_store_str(in_params)
+        # производит валидацию данных
+        engine.validate()
+        # производим расчет
+        engine.calculate()
+        # рендерим выходные данные задачи в шаблон
+        resp['body'] = render_to_string("out_params.html", { 'out_params': engine.get_out_params() })
+    except Exception as e:
+        # в случае ошибки при загрузки данных в движок
+        resp['status'] = 'error'
+        resp['body'] = e.message
+    return HttpResponse(dumps(resp), status = 200, mimetype="application/json")
 
 @login_required(login_url = '/login/')
 @admin_only

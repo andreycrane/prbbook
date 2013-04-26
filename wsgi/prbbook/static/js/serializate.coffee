@@ -17,7 +17,6 @@ $ ->
 		stage_count = $("#first_image").attr("stages")
 		first_img_url = "/problems/problem/#{problem}/img/#{object}/"
 		second_img_url = "/problems/problem/#{problem}/img/#{object}/stage/#{stage_count}/"
-		console.log object.b1, object, problem, first_img_url, second_img_url
 		$.getJSON '/problems/problem/preview/', { problem: problem, in_params: object }, (data, textStatus, jqXHR)->
 			console.log "Data: ", data
 			console.log "textStatus: ", textStatus
