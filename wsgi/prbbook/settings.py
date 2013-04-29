@@ -144,6 +144,7 @@ import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'django://'
 CELERY_IGNORE_RESULT = False
+CELERY_RESULT_ENGINE_OPTIONS = { "echo": True }
 
 INSTALLED_APPS = (
     'django.contrib.auth',
