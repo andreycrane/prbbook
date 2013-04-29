@@ -45,7 +45,8 @@ class ProblemEngine(Engine):
         pass
 
     def validate(self):
-        pass
+        if self.z0 >= self.b1:
+            raise Exception(u"Сдвиг z0 больше ширины прямоугольника")
 
     def get_store_str(self):
         dump_obj = {

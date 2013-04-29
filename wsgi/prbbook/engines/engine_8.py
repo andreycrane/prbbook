@@ -42,19 +42,81 @@ class ProblemEngine(Engine):
         pass
 
     def validate(self):
-        pass
+        if self.y0 >= self.h1:
+            raise Exception(u"Координата сдвига y0 больше высоты прямоугольника")
 
     def load_store_str(self, store_str):
-        pass
+        loads_obj = loads(store_str)
+        self.b1 = float(loads_obj['b1'])
+        self.h1 = float(loads_obj['h1'])
+        self.b2 = float(loads_obj['b2'])
+        self.h2 = float(loads_obj['h2'])
+        self.y0 = float(loads_obj['y0'])
 
     def get_store_str(self):
-        pass
+        dump_obj = {
+            'b1': self.b1,
+            'h1': self.h1,
+            'b2': self.b2,
+            'h2': self.h2,
+            'y0': self.y0
+        }
+        return dumps(dump_obj)
 
     def get_in_params(self):
-        pass
+        params = [
+            {'Прямоугольник':
+                [
+                    ('Ширина b<sub>1</sub>',self.b1, 'b1'),
+                    ('Высота h<sub>1</sub>',self.h1, 'h1')
+                ]
+            },
+            {'Равнобедренный треугольник':
+                [
+                    ('Основание b<sub>2</sub>',self.b2, 'b2'),
+                    ('Высота h<sub>2</sub>',self.h2, 'h2')
+                ]
+
+            },
+            {'Сдвиг треугольника':
+                [
+                    ('y<sub>0</sub>',self.y0, 'y0'),
+                ]
+            }
+        ]
+        return params
 
     def get_out_params(self):
-        pass
+        params = [
+            {'Координаты центра тяжести каждой из простых фигур':
+                [
+                    ('z<sub>1</sub>',self.z1),
+                    ('z<sub>2</sub>',self.z2),
+                    ('y<sub>1</sub>',self.y1),
+                    ('y<sub>2</sub>',self.y2)
+                ]
+            },
+            {'Координаты центра тежести всей фигуры':
+                [
+                    ('z<sub>c</sub>',self.zc),
+                    ('y<sub>c</sub>',self.yc)
+                ]
+            },
+            {'Центральные моменты инерции всей фигуры':
+                [
+                    ('J<sub>zc</sub>',self.Jzc),
+                    ('J<sub>yc</sub>',self.Jyc),
+                    ('J<sub>zcyc</sub>',self.Jzcyc)
+                ]
+            },
+            {'Положение главных осей':
+                [
+                    ('&alpha;<sub>max</sub>', self.alphamax),
+                    ('&alpha;<sub>min</sub>', self.alphamin)
+                ]
+            }
+        ]
+        return params
 
     def calculate(self):
         (h1, b1, h2, b2, y0) = (self.h1, self.b1, 
@@ -149,6 +211,34 @@ class ProblemEngine(Engine):
         draw.Line2FillArrow(x + b1 + 0.7, y + y0, x + b1 + 0.7, y + y0 + b2)
         draw.Line(x + b1 + 0.7, y + y0 + b2, x + b1 + 0.7, y + y0 + b2 + 2)
         draw.RightAlignText("b2", x + b1 + 0.7, y + y0 + b2 + 1.5)
+        draw.Line(x + b1, y, x + b1 + 1, y)
+        draw.Line2FillArrow(x + b1 + 0.7, y, x + b1 + 0.7, y + y0)
+        draw.RightAlignText("y0", x + b1 + 0.7, y + (y0 / 2.0))
+         # рисуем примитивы второго уровня отрисовки
+        if stage >= 2:
+            # рисуем координаты центра тяжести каждой из простых фигур
+            (z1, z2, y1, y2) = (self.z1, self.z2, self.y1, self.y2)
+            # координаты первого прямогольника
+            draw.Dot(x + z1, y + y1)
+            draw.Text("C1", x + z1, y + y1)
+            # координата второго прямоугольника
+            draw.Dot(x + z2, y + y2)
+            draw.Text("C2", x + z2, y + y2)
+            # рисуем координаты центра тяжести всей фигуры
+            (zc, yc) = (self.zc, self.yc)
+            # координата всей фигуры
+            draw.Dot(x + zc, y + yc)
+            # подпись координаты
+            draw.Text("C", x + zc, y + yc)
+            # рисуем положение главных осей
+            (alphamax, alphamin) = (self.alphamax, self.alphamin)
+            (Xv, Yv) = rotate_line(x + zc, y + yc, x + b1 + 7, y + yc, alphamin)
+            draw.LineFillArrow(x + zc, y + yc, Xv, Yv)
+            draw.Text("V", Xv, Yv)
+            logging.debug("Xv=%.3f Yv=%.3f" % (Xv, Yv))
+            (Xu, Yu) = rotate_line(x + zc, y + yc, x + b1 + 7, y + yc, alphamax)
+            draw.LineFillArrow(x + zc, y + yc, Xu, Yu)
+            draw.Text("U", Xu, Yu)
         return draw
 
 if __name__ == "__main__":
@@ -157,4 +247,6 @@ if __name__ == "__main__":
     engine = ProblemEngine()
     engine.load_preview_params()
     engine.calculate()
-    engine.get_image().show()
+    engine.get_image(stage = 2).show()
+    engine.get_in_params()
+    engine.get_out_params()

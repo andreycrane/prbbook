@@ -45,7 +45,8 @@ class ProblemEngine(Engine):
         pass
 
     def validate(self):
-        pass
+        if self.y0 >= self.h1:
+            raise Exception(u"Сдвиг y0 имеет недопустимое значение")
 
     def get_store_str(self):
         dump_obj = {
