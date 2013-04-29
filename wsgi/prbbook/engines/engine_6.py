@@ -48,10 +48,23 @@ class ProblemEngine(Engine):
         pass
 
     def get_store_str(self):
-        pass
+        dump_obj = {
+            'b1': self.b1,
+            'h1': self.h1,
+            'b2': self.b2,
+            'h2': self.h2,
+            'y0': self.y0
+        }
+        return dumps(dump_obj)
+
 
     def load_store_str(self, store_str):
-        pass
+        loads_obj = loads(store_str)
+        self.b1 = float(loads_obj['b1'])
+        self.h1 = float(loads_obj['h1'])
+        self.b2 = float(loads_obj['b2'])
+        self.h2 = float(loads_obj['h2'])
+        self.y0 = float(loads_obj['y0'])
 
     def get_in_params(self):
         params = [
