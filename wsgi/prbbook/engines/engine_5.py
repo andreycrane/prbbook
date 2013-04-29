@@ -45,13 +45,30 @@ class ProblemEngine(Engine):
         pass
 
     def validate(self):
-        pass
+        (h1,b1, h2, b2, z0) = (self.h1, self.b1, 
+                               self.h2, self.b2, self.z0)
+
+        if z0 >= b1:
+            raise Exception(u"Сдвиг z0 больше ширины прямоугольника")
 
     def get_store_str(self):
-        pass
+        dump_obj = {
+            'b1': self.b1,
+            'h1': self.h1,
+            'b2': self.b2,
+            'h2': self.h2,
+            'z0': self.z0
+        }
+        return dumps(dump_obj)
 
-    def load_store_str(self):
-        pass
+    def load_store_str(self, store_str):
+        loads_obj = loads(store_str)
+        self.b1 = float(loads_obj['b1'])
+        self.h1 = float(loads_obj['h1'])
+        self.b2 = float(loads_obj['b2'])
+        self.h2 = float(loads_obj['h2'])
+        self.z0 = float(loads_obj['z0'])
+        self.y0 = self.h1
 
     def get_in_params(self):
         params = [
