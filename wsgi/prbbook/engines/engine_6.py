@@ -29,7 +29,16 @@ class ProblemEngine(Engine):
     stage_count = 2
 
     def randomize_in_params(self):
-        pass
+        # генерируем размеры левого прямоугольника
+        h1 = float(randint(7, 12)) + choice((0.0, 0.5))
+        b1 = float(randint(5, 10)) + choice((0.0, 0.5))
+        # генерируем размеры правого прямоугольника
+        h2 = float(randint(7, 12)) + choice((0.0, 0.5))
+        b2 = float(randint(5, 10)) + choice((0.0, 0.5))
+        y0 = float(randint(1, int(h1 - 2)))
+
+        (self.h1, self.b1, 
+         self.h2, self.b2, self.y0) = (h1, b1, h2, b2, y0)
 
     def load_preview_params(self):
         h1 = 11.0
@@ -244,6 +253,12 @@ if __name__ == "__main__":
 
     engine = ProblemEngine()
     engine.load_preview_params()
+    engine.calculate()
+    engine.get_image(stage = 2).show()
+    engine.get_in_params()
+    engine.get_out_params()
+
+    engine.randomize_in_params()
     engine.calculate()
     engine.get_image(stage = 2).show()
     engine.get_in_params()
