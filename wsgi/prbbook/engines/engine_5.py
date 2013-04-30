@@ -29,7 +29,15 @@ class ProblemEngine(Engine):
     stage_count = 2
 
     def randomize_in_params(self):
-        pass
+        # генерируем размеры прямоугольника
+        self.h1 = float(randint(5, 10)) + choice((0.0, 0.5))
+        self.b1 = float(randint(4, 8)) + choice((0.0, 0.5))
+        # генерируем размеры треугольника
+        self.h2 = float(randint(5, 9)) + choice((0.0, 0.5))
+        self.b2 = float(randint(4, 7)) + choice((0.0, 0.5))
+        # генерируем координату z0
+        self.z0 = float(randint(1, int(self.b1 - 2)))
+        self.y0 = self.h1
 
     def load_preview_params(self):
         h1 = y0 = 9.0
@@ -42,7 +50,39 @@ class ProblemEngine(Engine):
          self.b2, self.z0, self.y0) = (h1, b1, h2, b2, z0, y0)
 
     def adjust(self):
-        pass
+        (h1, b1, h2, b2, z0, y0) = (self.h1, self.b1,
+                                    self.h2, self.b2,
+                                    self.z0, self.y0)
+        if z0 < 1.0:
+            raise Exception()
+
+        z1 = b1 / 2.0
+        z2 = z0 + (b2 / 2.0)
+        y1 = h1 / 2.0
+        y2 = y0 + (h2 / 3.0)
+
+        if abs(y1 - y2) < 1.0:
+            raise Exception()
+
+        A1 = h1 * b1
+        A2 = 0.5 * h2 * b2
+        zc = (A1 * z1 + A2 * z2) / (A1 + A2)
+        yc = (A1 * y1 + A2 * y2) / (A1 + A2)
+
+        if abs(z1 - zc) < 0.5:
+            raise Exception()
+
+        if abs(z2 - zc) < 0.5:
+            raise Exception()
+
+        if abs(y1 - yc) < 0.5:
+            raise Exception()
+
+        if abs(y2 - yc) < 0.5:
+            raise Exception()
+
+        if abs(b1 - zc) < 0.5:
+            raise Exception()
 
     def validate(self):
         (h1,b1, h2, b2, z0) = (self.h1, self.b1, 
@@ -251,11 +291,39 @@ class ProblemEngine(Engine):
         return draw
 
 if __name__ == "__main__":
-    logging.basicConfig(level = logging.DEBUG)
+    logging.basicConfig(level = logging.WARNING)
 
     engine = ProblemEngine()
-    engine.load_preview_params()
-    engine.calculate()
-    engine.get_image(stage = 2).show()
-    engine.get_in_params()
-    engine.get_out_params()
+    uniq_hash = {}
+    all_iters = 0
+    for i in xrange(1000):
+        while True:
+            all_iters += 1
+            try:
+                engine.randomize_in_params()
+                engine.adjust()
+                engine.calculate()
+            except Exception as e:
+                logging.debug(traceback.format_exc())
+            else:
+                #engine.get_image(stage = 2)
+                if uniq_hash.get(engine.get_store_str(), False):
+                    continue
+                else:
+                    uniq_hash[engine.get_store_str()] = engine.get_store_str()
+                    logging.warning(u"Сгенерирована задача: %d" % i)
+                    break
+
+    logging.warning(u"Количество полученных уникальных: %d" % len(uniq_hash))
+    logging.warning(u"Всего было выполнено итераций: %d" % all_iters)
+
+    while True:
+        try:
+            engine.randomize_in_params()
+            engine.adjust()
+            engine.calculate()
+        except Exception as e:
+            logging.debug(traceback.format_exc())
+        else:
+            engine.get_image(stage = 2).show()
+            break
