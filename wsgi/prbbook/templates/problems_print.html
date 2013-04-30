@@ -2,13 +2,19 @@
 {% load webdesign %}
 {% load staticfiles %}
 
+{% block title %}
+	{{ group }}
+{% endblock %}
+
 {% block styles %}
 	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_list.less' %}" />
 	<link rel="stylesheet/less" type="text/css" href="{% static 'css/problems_styles.less' %}" />
 {% endblock %}
 
-{% block title %}
-	{{ group }}
+{% block scripts %}
+	<script type="application/x-javascript">
+		window.print();
+	</script>
 {% endblock %}
 
 {% block body %}
