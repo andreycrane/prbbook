@@ -81,7 +81,7 @@ class ProblemEngine(Engine):
         if abs(y2 - yc) < 0.5:
             raise Exception()
 
-        if abs(b1 - zc) < 0.5:
+        if abs(h1 - yc) < 0.5:
             raise Exception()
 
     def validate(self):
