@@ -89,13 +89,13 @@ class DesignDraw:
     # функция рисующая линию с закрашенной стрелкой в конце
     # принимаемые координаты в декартовой системе
     # в сантиметрах
-    def LineFillArrow(self, x1, y1, x2, y2, headlen = 10, headwid = 6):
+    def LineFillArrow(self, x1, y1, x2, y2, headlen = 10, headwid = 6, width = 1):
         [x1, y1, x2, y2] =  [self.sm2px(x1), self.sm2px(y1), self.sm2px(x2), self.sm2px(y2)]
         [x1, y1] = self.dec2screen(x1, y1)
         [x2, y2] = self.dec2screen(x2, y2)
 
         angle = atan2(y2 - y1, x2 - x1)
-        self.draw.line((x1, y1, x2, y2), fill="black")
+        self.draw.line((x1, y1, x2, y2), fill="black", width = width)
         # координаты левого крыла
         (lwx, lwy) = (x2 - headlen * cos(angle - pi / headwid), y2 - headlen * sin(angle - pi / headwid))
         # координаты правого крыла
@@ -176,3 +176,11 @@ class DesignDraw:
 
     def TextSize(self, text):
         return self.font.getsize(text)
+
+    def Circle(self, x, y, radius):
+        radius = self.sm2px(radius)
+        halfr = radius / 2
+        x = self.sm2px(x)
+        y = self.sm2px(y)
+        (x, y) = self.dec2screen(x, y)
+        self.draw.ellipse((x - halfr, y - halfr, x + halfr, y + halfr), fill=None, outline=(0, 0, 0, 0))

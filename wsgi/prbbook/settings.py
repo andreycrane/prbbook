@@ -174,6 +174,7 @@ from engines import engine_5
 from engines import engine_6
 from engines import engine_7
 from engines import engine_8
+from engines import engine_9
 
 EngineManager.add_engine(engine_1.ProblemEngine)
 EngineManager.add_engine(engine_2.ProblemEngine)
@@ -183,6 +184,7 @@ EngineManager.add_engine(engine_5.ProblemEngine)
 EngineManager.add_engine(engine_6.ProblemEngine)
 EngineManager.add_engine(engine_7.ProblemEngine)
 EngineManager.add_engine(engine_8.ProblemEngine)
+EngineManager.add_engine(engine_9.ProblemEngine)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
