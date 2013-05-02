@@ -29,16 +29,18 @@
 					{% endautoescape %}
 					<div class="left-side">
 						<p class="lead">Исходные данные к задаче:</p>
-						<ul class="unstyled params-list">
+						<ul class="unstyled">
 							{% autoescape off %}
 								{% for param in problem.in_params %}
 									<li>
 										{% for key, value in param.items %}
 											<li>
 												{{ key }}:
-													{% for name, zn in value %}
-														<span>{{ name|lower }}={{ zn|floatformat:"-2" }}</span>{% if forloop.last %}.{% else %},&nbsp;{% endif %}
+													<ul>
+													{% for p_name, zn, name, noedit, unit in value %}
+														<li>{{ p_name }}={{ zn|floatformat:"-2" }} {{ unit }}</li>
 													{% endfor %}
+													</ul>
 											</li>
 										{% endfor %}
 									</li>
@@ -68,8 +70,8 @@
 											<li>
 												{{ key }}:
 												<ul>
-													{% for name, zn in value %}
-													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+													{% for name, zn, unit in value %}
+													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 													{% endfor %}
 												</ul>
 											</li>

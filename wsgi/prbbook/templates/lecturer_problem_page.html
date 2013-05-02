@@ -47,8 +47,8 @@
 											{% for key, value in param.items %}
 												{{ key }}:
 												<ul>
-													{% for name, zn in value %}
-													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+													{% for p_name, zn, name, noedit, unit in value %}
+													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 													{% endfor %}
 												</ul>
 											{% endfor %}
@@ -80,8 +80,8 @@
 												<li>
 													{{ key }}:
 													<ul>
-														{% for name, zn in value %}
-														<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+														{% for name, zn, unit in value %}
+														<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 														{% endfor %}
 													</ul>
 												</li>
@@ -113,12 +113,12 @@
 									{% for param in in_params %}
 										{% for group, params in param.items %}
 											<p class="params-group">{{ group }}:</p>
-												{% for description, value, name, noedit in params %}
+												{% for description, value, name, noedit, unit in params %}
 													{% if not noedit %}
 														<div class="control-group">
 															<label class="control-label" for="input">{{ description }}</label>
 															<div class="controls">
-																<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/>
+																<input class="input-small" type="text" name="{{ name }}" value="{{ value }}" required  pattern="\d+(\,\d+)?"/> {{ unit }}
 															</div>
 														</div>
 													{% endif %}
@@ -154,8 +154,8 @@
 													<li>
 														{{ key }}:
 														<ul>
-															{% for name, zn in value %}
-															<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+															{% for name, zn, unit in value %}
+															<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 															{% endfor %}
 														</ul>
 													</li>

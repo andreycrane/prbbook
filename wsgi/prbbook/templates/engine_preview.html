@@ -61,8 +61,8 @@
 											<li>
 												{{ key }}:
 												<ul>
-													{% for name, zn, name, noedit, unit in value %}
-													<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
+													{% for p_name, zn, name, noedit, unit in value %}
+													<li>{{ p_name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 													{% endfor %}
 												</ul>
 											</li>
