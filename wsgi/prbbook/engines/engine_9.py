@@ -26,7 +26,18 @@ class ProblemEngine(Engine):
     stage_count = 2
 
     def randomize_in_params(self):
-        pass
+        self.l1 = (float(randint(2, 10)) / 10.0) + choice((0.0, 0.5))
+        self.l2 = (float(randint(2, 10)) / 10.0) + choice((0.0, 0.5))
+        self.l3 = (float(randint(2, 10)) / 10.0) + choice((0.0, 0.5))
+        self.P1 = float(randint(1, 10) * 10) + choice((0, 5))
+        self.P2 = float(randint(1, 10) * 10) + choice((0, 5))
+        self.P3 = float(randint(1, 10) * 10) + choice((0, 5))
+        self.P1 = choice((-self.P1, self.P1))
+        self.P2 = choice((-self.P2, self.P2))
+        self.P3 = choice((-self.P3, self.P3))
+        self.Qt = float(randint(250, 400))
+        self.nt = 1.0 + ((randint(4, 7) / 10.0))
+        self.E = 210
 
     def load_preview_params(self):
         self.l1 = 4.0
@@ -40,13 +51,46 @@ class ProblemEngine(Engine):
         self.E = 210
 
     def adjust(self):
-        pass
+        (l1, l2, l3, 
+         P1, P2, P3,
+         Qt, nt, E) = (self.l1, self.l2, self.l3,
+                       self.P1, self.P2, self.P3,
+                       self.Qt, self.nt, self.E)
+        if sum((l1, l2, l3)) > 2.5:
+            raise Exception()
+        N1 = P1
+        # Участок 2
+        N2 = P1 + P2
+        # Участок 3
+        N3 = P1 + P2 + P3
+        if (not N1) or (not N2) or (not N3):
+            raise Exception()
+
+        L = sum((l1, l2, l3))
+
+        if L < 1.0:
+            raise Exception()
+
+        prl1 = l1 / L
+        prl2 = l2 / L
+        prl3 = l3 / L
+
+        if prl1 < 0.2:
+            raise Exception()
+        if prl2 < 0.2:
+            raise Exception()
+        if prl3 < 0.2:
+            raise Exception()
 
     def validate(self):
-        pass
+        (l1, l2, l3, 
+         P1, P2, P3,
+         Qt, nt, E) = (self.l1, self.l2, self.l3,
+                       self.P1, self.P2, self.P3,
+                       self.Qt, self.nt, self.E)
 
-    def validate(self):
-        pass
+        if (l1 <= 0) or (l2 <= 0)  or (l3 <= 0):
+            raise Exception("Значение длины участка не может быть меньше либо равно 0.")
 
     def load_store_str(self, store_str):
         loads_obj = loads(store_str)
@@ -61,29 +105,39 @@ class ProblemEngine(Engine):
         self.E = 210.0
 
     def get_store_str(self):
-        pass
+        dump_obj = {
+            'l1': self.l1,
+            'l2': self.l2,
+            'l3': self.l3,
+            'P1': self.P1,
+            'P2': self.P2,
+            'P3': self.P3,
+            'Qt': self.Qt,
+            'nt': self.nt
+        }
+        return dumps(dump_obj)
 
     def get_in_params(self):
         params = [
             {'Длины участков':
                 [
-                    ('l<sub>1</sub>', self.l1, 'l1'),
-                    ('l<sub>2</sub>', self.l2, 'l2'),
-                    ('l<sub>3</sub>', self.l3, 'l3')
+                    ('l<sub>1</sub>', self.l1, 'l1', '', 'м'),
+                    ('l<sub>2</sub>', self.l2, 'l2', '', 'м'),
+                    ('l<sub>3</sub>', self.l3, 'l3', '', 'м')
                 ]
             },
             {'Силы действующие на участках':
                 [
-                    ('P<sub>1</sub>',self.P1, 'P1'),
-                    ('P<sub>2</sub>',self.P2, 'P2'),
-                    ('P<sub>3</sub>',self.P3, 'P3')
+                    ('P<sub>1</sub>',self.P1, 'P1', '', 'кН'),
+                    ('P<sub>2</sub>',self.P2, 'P2', '', 'кН'),
+                    ('P<sub>3</sub>',self.P3, 'P3', '', 'кН')
                 ]
             },
             {'Другие параметры':
                 [
-                    ('&sigma;',self.Qt, 'Qt'),
-                    ('n<sub>T</sub>', self.nt, 'nt'),
-                    ('E', self.E, 'E', 'noedit')
+                    ('&sigma;',self.Qt, 'Qt', '', 'МПа'),
+                    ('n<sub>T</sub>', self.nt, 'nt', '', ''),
+                    ('E', self.E, 'E', 'noedit', 'ГПа')
                 ]
             }
         ]
@@ -94,35 +148,35 @@ class ProblemEngine(Engine):
         params = [
             {'Усилия действующие на каждом участке':
                 [
-                    ('N<sub>1</sub>', self.N1),
-                    ('N<sub>2</sub>', self.N2),
-                    ('N<sub>3</sub>', self.N3)
+                    ('N<sub>1</sub>', self.N1, 'кН'),
+                    ('N<sub>2</sub>', self.N2, 'кН'),
+                    ('N<sub>3</sub>', self.N3, 'кН')
                 ]
             },
             {'Значение допускаемого няпржения':
                 [
-                    ('[&sigma;]', self.Q)
+                    ('[&sigma;]', self.Q, 'МПа')
                 ]
             },
             {'Размеры поперечного сечения':
                 [
-                    ('d<sub>1</sub>', self.d1),
-                    ('d<sub>2</sub>', self.d2),
-                    ('a', self.a)
+                    ('d<sub>1</sub>', self.d1, 'мм'),
+                    ('d<sub>2</sub>', self.d2, 'мм'),
+                    ('a', self.a, 'мм')
                 ]
             },
             {'Удлинения участков стержня:':
                 [  
-                    ('&Delta;<sub>1</sub>', self.dl1),
-                    ('&Delta;<sub>2</sub>', self.dl2),
-                    ('&Delta;<sub>3</sub>', self.dl3)
+                    ('&Delta;<sub>1</sub>', self.dl1, 'мм'),
+                    ('&Delta;<sub>2</sub>', self.dl2, 'мм'),
+                    ('&Delta;<sub>3</sub>', self.dl3, 'мм')
                 ]
             },
             {'Перемещения характерных сечений стержня':
                 [
-                    ('&Delta;<sub>B</sub>', self.dlB),
-                    ('&Delta;<sub>C</sub>', self.dlC),
-                    ('&Delta;<sub>D</sub>', self.dlD),
+                    ('&Delta;<sub>B</sub>', self.dlB, 'мм'),
+                    ('&Delta;<sub>C</sub>', self.dlC, 'мм'),
+                    ('&Delta;<sub>D</sub>', self.dlD, 'мм'),
                 ]
             }
         ]
@@ -362,9 +416,39 @@ class ProblemEngine(Engine):
         return draw
 
 if __name__ == "__main__":
-    logging.basicConfig(level = logging.DEBUG)
+    logging.basicConfig(level = logging.WARNING)
 
     engine = ProblemEngine()
-    engine.load_preview_params()
-    engine.calculate()
-    engine.get_image(stage = 2).show()
+    uniq_hash = {}
+    all_iters = 0
+    for i in xrange(1000):
+        while True:
+            all_iters += 1
+            try:
+                engine.randomize_in_params()
+                engine.adjust()
+                engine.calculate()
+            except Exception as e:
+                logging.debug(traceback.format_exc())
+            else:
+                #engine.get_image(stage = 2)
+                if uniq_hash.get(engine.get_store_str(), False):
+                    continue
+                else:
+                    uniq_hash[engine.get_store_str()] = engine.get_store_str()
+                    logging.warning(u"Сгенерирована задача: %d" % i)
+                    break
+
+    logging.warning(u"Количество полученных уникальных: %d" % len(uniq_hash))
+    logging.warning(u"Всего было выполнено итераций: %d" % all_iters)
+
+    while True:
+        try:
+            engine.randomize_in_params()
+            engine.adjust()
+            engine.calculate()
+        except Exception as e:
+            logging.debug(traceback.format_exc())
+        else:
+            engine.get_image(stage = 2).show()
+            break

@@ -6,8 +6,8 @@
 					<li>
 						{{ key }}:
 						<ul>
-							{% for name, zn in value %}
-							<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }}</li>
+							{% for name, zn, unit in value %}
+							<li>{{ name }}:&nbsp;&nbsp;{{ zn|floatformat:"-2" }} {{ unit }}</li>
 							{% endfor %}
 						</ul>
 					</li>
