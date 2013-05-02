@@ -220,7 +220,7 @@ class ProblemEngine(Engine):
         lx3 = (l3 * Le) / L
         logging.debug("lx1=%.3f lx2=%.3f lx3=%.3f" % (lx1, lx2, lx3))
         # начинаем рисовать всю фигуру
-        if stage == 1 or stage == 2:
+        if stage == 1:
             # рисуем граничную линию
             draw.Line(x, y + 5, x, y + 11)
             # эталонная величина сечения для неизвестного - 4
@@ -245,9 +245,9 @@ class ProblemEngine(Engine):
             draw.TopAlignText("l3", x + lx3 + lx2 + (lx1 / 2.0), y + 10.5)
             # переходим к отрисовке направлений сил
             # определяем направления сил
-            direction1 = 0.8 if P1 > 10 else -0.8
-            direction2 = 0.8 if P2 > 10 else -0.8
-            direction3 = 0.8 if P3 > 10 else -0.8
+            direction1 = 0.8 if P1 > 0 else -0.8
+            direction2 = 0.8 if P2 > 0 else -0.8
+            direction3 = 0.8 if P3 > 0 else -0.8
             # 3
             draw.LineFillArrow(x + lx3, y + 8, x + lx3 + direction3, y + 8)
             draw.TopAlignText("P3", x + lx3 + (direction3 / 2.0), y + 8)
@@ -284,7 +284,81 @@ class ProblemEngine(Engine):
             draw.Line2FillArrow(x + 7.5, y - 0.5, x + 10.5, y - 0.5)
             draw.BottomAlignText("d1", x + 9.0, y - 0.5)
         elif stage == 2:
-            pass
+            # перерасчитываем сечения участков
+            De = 4.0 # эталонное сечение для отрисовки
+            Dmax = max((a, df1, df2))
+            ax = ((De * a) / Dmax)
+            d1x = ((De * df1) / Dmax)
+            d2x = ((De * df2) / Dmax)
+            logging.debug("ax=%.3f d1x=%.3f d2x=%.3f" % (ax, d1x, d2x))
+            # начинаем с отрисовки сечений фигур
+            # рисуем сечение первой фигуры и ее размеры
+            draw.Rect(x + 3 - (ax / 2.0), y + 3 - (ax / 2.0), ax, ax)
+            draw.Line(x + 3 - (ax / 2.0), y + 3 - (ax / 2.0), x + 3 - (ax / 2.0), y + 3 - (ax / 2.0) - 1)
+            draw.Line(x + 3 - (ax / 2.0) + ax, y + 3 - (ax / 2.0), x + 3 - (ax / 2.0) + ax, y + 3 - (ax / 2.0) - 1)
+            draw.Line2FillArrow(x + 3 - (ax / 2.0), y + 3 - (ax / 2.0) - 0.5, x + 3 - (ax / 2.0) + ax, y + 3 - (ax / 2.0) - 0.5)
+            draw.BottomAlignText("a", x + 3 - (ax / 2.0) + (ax / 2.0), y + 3 - (ax / 2.0) - 0.5)
+
+            draw.Line(x + 3 - (ax / 2.0), y + 3 - (ax / 2.0), x + 3 - (ax / 2.0) - 1, y + 3 - (ax / 2.0))
+            draw.Line(x + 3 - (ax / 2.0), y + 3 - (ax / 2.0) + ax, x + 3 - (ax / 2.0) - 1, y + 3 - (ax / 2.0) + ax)
+            draw.Line2FillArrow(x + 3 - (ax / 2.0) - 0.5, y + 3 - (ax / 2.0), x + 3 - (ax / 2.0) - 0.5, y + 3 - (ax / 2.0) + ax)
+            draw.LeftAlignText("a", x + 3 - (ax / 2.0) - 0.5, y + 3 - (ax / 2.0) + (ax / 2.0))
+            # рисуем сечение и размеры второй фигуры
+            draw.Circle(x + 8, y + 3, d2x)
+            draw.Line(x + 8 - (d2x / 2.0), y + 3, x + 8 - (d2x / 2.0), y + 3 - (d2x / 2.0) - 1)
+            draw.Line(x + 8 + (d2x / 2.0), y + 3, x + 8 + (d2x / 2.0), y + 3 - (d2x / 2.0) - 1)
+            draw.Line2FillArrow(x + 8 - (d2x / 2.0), y + 3 - (d2x / 2.0) - 0.5,x + 8 + (d2x / 2.0), y + 3 - (d2x / 2.0) - 0.5)
+            draw.BottomAlignText("d2", x + 8, y + 3 - (d2x / 2.0) - 0.5)
+            # рисуем сечение и размеры третьей фигуры
+            draw.Circle(x + 13, y + 3, d1x)
+            draw.Line(x + 13 - (d1x / 2.0), y + 3, x + 13 - (d1x / 2.0), y + 3 - (d1x / 2.0) - 1)
+            draw.Line(x + 13 + (d1x / 2.0), y + 3, x + 13 + (d1x / 2.0), y + 3 - (d1x / 2.0) - 1)
+            draw.Line2FillArrow(x + 13 - (d1x / 2.0), y + 3 - (d1x / 2.0) - 0.5, x + 13 + (d1x / 2.0), y + 3 - (d1x / 2.0) - 0.5)
+            draw.BottomAlignText("d2", x + 13, y + 3 - (d1x / 2.0) - 0.5)
+
+            # получеам значение суммы длин всех трех участков
+            Le = 14.0 # эталонное для рисунка
+            L = sum((l1, l2, l3))
+            # перерасчитываем длины участков для рисунка через пропорцию к эталонному
+            lx1 = (l1 * Le) / L
+            lx2 = (l2 * Le) / L
+            lx3 = (l3 * Le) / L
+            logging.debug("lx1=%.3f lx2=%.3f lx3=%.3f" % (lx1, lx2, lx3))
+            # рисуем граничную линию
+            draw.Line(x, y + 6, x, y + 12)
+            # рисуем контур третьего сечения
+            draw.Rect(x, y + 8.5 - (ax / 2.0), lx3, ax)
+            # рисуем контур второго сечения
+            draw.Rect(x + lx3, y + 8.5 - (d2x / 2.0), lx2, d2x)
+            # рисуем контур первого сечения
+            draw.Rect(x + lx3 + lx2, y + 8.5 - (d1x / 2.0), lx1, d1x)
+            # рисуем размеры участков
+            # 3
+            draw.Line(x + lx3, y + 8.5 + (ax / 2.0), x + lx3, y + 12)
+            draw.Line2FillArrow(x, y + 11.5, x + lx3, y + 11.5)
+            draw.TopAlignText("l3", x + (lx3 / 2.0), y + 11.5)
+            # 2 
+            draw.Line(x + lx3 + lx2, y + 8.5 + (d2x / 2.0), x + lx3 + lx2, y + 12)
+            draw.Line2FillArrow(x + lx3, y + 11.5, x + lx3 + lx2, y + 11.5)
+            draw.TopAlignText("l2", x + lx3 + (lx2 / 2.0), y + 11.5)
+            # 1
+            draw.Line(x + lx3 + lx2 + lx1, y + 8.5 + (d1x / 2.0), x + lx3 + lx2 + lx1, y + 12)
+            draw.Line2FillArrow(x + lx3 + lx2, y + 11.5, x + lx3 + lx2 + lx1, y + 11.5)
+            draw.TopAlignText("l1", x + lx3 + lx2+ (lx1 / 2.0), y + 11.5)
+            # переходим к отрисовке направлений сил
+            # определяем направления сил
+            direction1 = 1 if P1 > 0 else -1
+            direction2 = 1 if P2 > 0 else -1
+            direction3 = 1 if P3 > 0 else -1
+            # 3
+            draw.LineFillArrow(x + lx3, y + 8.5, x + lx3 + (direction3), y + 8.5, width = 2)
+            draw.TopAlignText("P3", x + lx3 + (direction3 / 2.0), y + 8.5)
+            # 2
+            draw.LineFillArrow(x + lx3 + lx2, y + 8.5, x + lx3 + lx2 + (direction2), y + 8.5, width = 2)
+            draw.TopAlignText("P2", x + lx3 + lx2 + (direction2 / 2.0), y + 8.5)
+            # 1
+            draw.LineFillArrow(x + lx3 + lx2 + lx1, y + 8.5, x + lx3 + lx2 + lx1 +(direction1), y + 8.5, width = 2)
+            draw.TopAlignText("P1", x + lx3 + lx2 + lx1 + (direction1 / 2.0), y + 8.5)
         return draw
 
 if __name__ == "__main__":
