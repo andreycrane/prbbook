@@ -99,10 +99,30 @@ class ProblemEngine(Engine):
                     ('N<sub>3</sub>', self.N3)
                 ]
             },
-            {'Значения допускаемого няпржения':
+            {'Значение допускаемого няпржения':
                 [
-                    ('[&sigma;]', self.Q),
-                    ('d<sub>1</sub>', self.d1)
+                    ('[&sigma;]', self.Q)
+                ]
+            },
+            {'Размеры поперечного сечения':
+                [
+                    ('d<sub>1</sub>', self.d1),
+                    ('d<sub>2</sub>', self.d2),
+                    ('a', self.a)
+                ]
+            },
+            {'Удлинения участков стержня:':
+                [  
+                    ('&Delta;<sub>1</sub>', self.dl1),
+                    ('&Delta;<sub>2</sub>', self.dl2),
+                    ('&Delta;<sub>3</sub>', self.dl3)
+                ]
+            },
+            {'Перемещения характерных сечений стержня':
+                [
+                    ('&Delta;<sub>B</sub>', self.dlB),
+                    ('&Delta;<sub>C</sub>', self.dlC),
+                    ('&Delta;<sub>D</sub>', self.dlD),
                 ]
             }
         ]
