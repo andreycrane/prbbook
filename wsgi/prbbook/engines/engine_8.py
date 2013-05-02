@@ -102,20 +102,20 @@ class ProblemEngine(Engine):
         params = [
             {'Прямоугольник':
                 [
-                    ('Ширина b<sub>1</sub>',self.b1, 'b1'),
-                    ('Высота h<sub>1</sub>',self.h1, 'h1')
+                    ('Ширина b<sub>1</sub>',self.b1, 'b1', '', 'см'),
+                    ('Высота h<sub>1</sub>',self.h1, 'h1', '', 'см')
                 ]
             },
             {'Равнобедренный треугольник':
                 [
-                    ('Основание b<sub>2</sub>',self.b2, 'b2'),
-                    ('Высота h<sub>2</sub>',self.h2, 'h2')
+                    ('Основание b<sub>2</sub>',self.b2, 'b2', '', 'см'),
+                    ('Высота h<sub>2</sub>',self.h2, 'h2', '', 'см')
                 ]
 
             },
             {'Сдвиг треугольника':
                 [
-                    ('y<sub>0</sub>',self.y0, 'y0'),
+                    ('y<sub>0</sub>',self.y0, 'y0', '', 'см'),
                 ]
             }
         ]
@@ -125,29 +125,29 @@ class ProblemEngine(Engine):
         params = [
             {'Координаты центра тяжести каждой из простых фигур':
                 [
-                    ('z<sub>1</sub>',self.z1),
-                    ('z<sub>2</sub>',self.z2),
-                    ('y<sub>1</sub>',self.y1),
-                    ('y<sub>2</sub>',self.y2)
+                    ('z<sub>1</sub>',self.z1, 'см'),
+                    ('z<sub>2</sub>',self.z2, 'см'),
+                    ('y<sub>1</sub>',self.y1, 'см'),
+                    ('y<sub>2</sub>',self.y2, 'см')
                 ]
             },
             {'Координаты центра тежести всей фигуры':
                 [
-                    ('z<sub>c</sub>',self.zc),
-                    ('y<sub>c</sub>',self.yc)
+                    ('z<sub>c</sub>',self.zc, 'см'),
+                    ('y<sub>c</sub>',self.yc, 'см')
                 ]
             },
             {'Центральные моменты инерции всей фигуры':
                 [
-                    ('J<sub>zc</sub>',self.Jzc),
-                    ('J<sub>yc</sub>',self.Jyc),
-                    ('J<sub>zcyc</sub>',self.Jzcyc)
+                    ('J<sub>zc</sub>',self.Jzc, 'см<sup>4</sup>'),
+                    ('J<sub>yc</sub>',self.Jyc, 'см<sup>4</sup>'),
+                    ('J<sub>zcyc</sub>',self.Jzcyc, 'см<sup>4</sup>')
                 ]
             },
             {'Положение главных осей':
                 [
-                    ('&alpha;<sub>max</sub>', self.alphamax),
-                    ('&alpha;<sub>min</sub>', self.alphamin)
+                    ('&alpha;<sub>max</sub>', self.alphamax, '&deg;'),
+                    ('&alpha;<sub>min</sub>', self.alphamin, '&deg;')
                 ]
             }
         ]
