@@ -11,7 +11,7 @@ from lib.engine import Engine
 from lib.draw_math import rotate_line
 
 class ProblemEngine(Engine):
-    name = u"Задача 2. Квадрат с вырезом (справа)"
+    name = u"Задача 2. Прямоугольник с вырезом (справа)"
     short_name = __name__
     category = "Геометрические характеристики поперечных сечений"
     description = """
@@ -241,19 +241,19 @@ class ProblemEngine(Engine):
         # рисуем полигон фигуры
         draw.Polygon(polygon)
         # рисуем подписи внешней фигуры
-        draw.Text("h1", x - 0.8, y + (h1 / 2.0) - 0.3)
-        draw.Text("b1", x + (b1 / 2.0) - 0.8, y - 0.8) 
+        draw.LeftAlignText("h1", x, y + (h1 / 2.0))
+        draw.BottomAlignText("b1", x + (b1 / 2.0), y) 
         # рисуем подписи выреза
-        draw.Text("h2", x + z0 - 0.8, y + y0 + (h2 / 2.0) - 0.3)
-        draw.Text("b2", x + z0 + (b2 / 2.0) - 0.3, y + y0 - 0.8)
+        draw.LeftAlignText("h2", x + z0, y + y0 + (h2 / 2.0))
+        draw.BottomAlignText("b2", x + z0 + (b2 / 2.0), y + y0)
         # рисуем стрелку для координаты z0
         draw.Line2FillArrow(x, y + y0, x + z0, y + y0)
         # рисуем подпись координаты
-        draw.Text("z0", x + (z0 / 2.0) - 0.3, y + y0)
+        draw.TopAlignText("z0", x + (z0 / 2.0), y + y0)
         # рисуем стрелку для координаты y0
         draw.Line2FillArrow(x + z0, y, x + z0, y + y0)
         # рисуем подпись координаты
-        draw.Text("y0", x + z0, y + (y0 / 2.0) - 0.3)
+        draw.RightAlignText("y0", x + z0, y + (y0 / 2.0))
 
         if stage >= 2:
             # рисуем координаты центра тяжести кажой из простых фигур
