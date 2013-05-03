@@ -282,21 +282,21 @@ class ProblemEngine(Engine):
             # внутренний прямоугольник
             draw.Rect(z0 + x, y0 + y, b2, h2)
             # подпись высоты внешнего прямоугольника
-            draw.Text("h1", x - 0.8, y + h1/2)
+            draw.LeftAlignText("h1", x, y + (h1 / 2.0))
             # подпись ширины внешнего прямоугольника
-            draw.Text('b1', x + b1/2, y - 0.8)
+            draw.BottomAlignText('b1', x + (b1 / 2.0), y)
             # подпись высоты внутреннего прямоугольника
-            draw.Text('h2', z0 + x - 0.8, y0 + y + h2/2)
+            draw.LeftAlignText('h2', z0 + x, y0 + y + (h2 / 2.0))
             # подпись ширины внутреннего треугольника
-            draw.Text('b2', z0 + x + b2/2, y0 + y - 0.8)
+            draw.BottomAlignText('b2', z0 + x + (b2 / 2.0), y0 + y)
             # расстояние по Z0 от внешнего квадрата
             draw.Line2FillArrow(z0 + x, y0 + y, x, y0 + y)
             # подпись над расстонием Z0
-            draw.Text('z0', x + z0/2 - 0.4, y0 + y)
+            draw.TopAlignText('z0', x + (z0 / 2.0), y0 + y)
             # расстояние по y0 от внешнего квадрата
             draw.Line2FillArrow(z0 + x, y0 + y, z0 + x, y)
             # подпись над расстонием y0
-            draw.Text('y0', z0 + x, y + y0/2 - 0.3)
+            draw.RightAlignText('y0', z0 + x, y + (y0 / 2.0))
 
         # второй этап решение
         if stage >= 2:
