@@ -271,18 +271,18 @@ class ProblemEngine(Engine):
         draw.Line(x, y + y0 + h2, x - 1.5, y + y0 + h2)
         draw.Line2FillArrow(x - 1.2, y + y0, x - 1.2, y + y0 + h2)
         # рисуем подпись высоты треугольника
-        draw.Text("h2", x - 1.9, y + y0 + (h2 / 2.0))
+        draw.LeftAlignText("h2", x - 1.2, y + y0 + (h2 / 2.0))
         # рисуем подпись ширина треугольника
-        draw.Text("b2", x + z0 + (b2 / 2.0) - 0.3, y + y0 - 0.7)
+        draw.BottomAlignText("b2", x + z0 + (b2 / 2.0), y + y0)
         # рисуем подписи внешней фигуры
-        draw.Text("b1", x + b1 / 2.0 - 0.5, y - 0.7)
-        draw.Text("h1", x - 0.7, y + h1 / 2.0)
+        draw.BottomAlignText("b1", x + (b1 / 2.0), y)
+        draw.LeftAlignText("h1", x, y + (h1 / 2.0))
         # рисуем стрелки координат треугольника
         draw.Line2FillArrow(x, y + y0, x + z0, y + y0)
         draw.Line2FillArrow(x + z0, y, x + z0, y + y0)
         # рисуем подписи над стрелками
-        draw.Text("z0", x + (z0 / 2.0) - 0.3, y + y0)
-        draw.Text("y0", x + z0, y + (y0 / 2.0) - 0.2)
+        draw.TopAlignText("z0", x + (z0 / 2.0), y + y0)
+        draw.RightAlignText("y0", x + z0, y + (y0 / 2.0))
         # рисуем примитивы второго уровня отрисовки
         if stage >= 2:
             # рисуем координаты центра тяжести каждой из простых фигур
