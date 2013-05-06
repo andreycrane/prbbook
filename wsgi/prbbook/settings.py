@@ -142,7 +142,7 @@ TEMPLATE_DIRS = (
 import djcelery
 
 djcelery.setup_loader()
-BROKER_URL = 'django://'
+BROKER_URL = 'redis://localhost:6379/0'
 CELERY_IGNORE_RESULT = False
 CELERY_RESULT_ENGINE_OPTIONS = { "echo": True }
 
