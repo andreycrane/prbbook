@@ -12,6 +12,8 @@ PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = ['*']
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
