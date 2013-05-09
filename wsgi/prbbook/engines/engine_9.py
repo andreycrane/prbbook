@@ -12,16 +12,12 @@ from lib.draw_math import rotate_line
 import math
 
 class ProblemEngine(Engine):
-    name = u"Задача 9. Растяжение"
+    name = u"Задача 9. Растяжение-сжатие прямых стержней"
     short_name = __name__
-    category = "Задачи на растяжение и сжатие"
+    category = "Задачи на растяжение-сжатие"
     description = """
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  Стальной брус, находится под действием системы сил (см. рис. к заданию).
+                  Требуется определить сечения и его полное удлинение.
                   """
     stage_count = 2
 
