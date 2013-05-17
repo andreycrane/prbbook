@@ -8,5 +8,6 @@ urlpatterns = patterns('prbbook.students.views',
 	url(r'^groups/page/(?P<page>\d+)/$', 'groups', name="students_groups_page"),
 	url(r'^groups/add/$', 'add_group', name="add_group"),
 	url(r'^student/(?P<student_id>\d+)/problems/', 'student_problems_list', name="students_problems_list"),
-	url(r'^groups/group/(?P<group_id>\d+)/$', 'students_of_group', name="students_of_group")
+	url(r'^groups/group/(?P<group_id>\d+)/$', 'students_of_group', name="students_of_group"),
+	url(r'register/html/$', 'register_from_html', name='register_from_html')
 )

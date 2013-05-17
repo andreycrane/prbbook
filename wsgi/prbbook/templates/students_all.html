@@ -19,7 +19,7 @@
 					<tbody>
 						{% for student in students %}
 							<tr>
-								<td>{{ student.first_name }}</td>
+								<td>{{ student.last_name }} {{ student.first_name }}</td>
 								<td>{{ student.username }}</td>
 								<td>{{ student.userprofile.group.name }}</td>
 								<td>

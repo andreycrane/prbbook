@@ -9,7 +9,7 @@ if os.environ.has_key('OPENSHIFT_REPO_DIR'):
 
 PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
@@ -147,6 +147,7 @@ djcelery.setup_loader()
 BROKER_URL = 'django:///'
 CELERY_IGNORE_RESULT = False
 CELERY_RESULT_ENGINE_OPTIONS = { "echo": True }
+CELERYD_CONCURRENCY = 1
 
 INSTALLED_APPS = (
     'django.contrib.auth',

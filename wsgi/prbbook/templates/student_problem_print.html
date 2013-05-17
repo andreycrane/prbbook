@@ -16,7 +16,7 @@
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="page">
-				<p>{{ problem.object.group.name }} - {{ problem.object.user.first_name }} {{ problem.object.user.userprofile.group }}</p>
+				<p>{{ problem.object.group.name }} - {{ problem.object.user.last_name }} {{ problem.object.user.first_name }} {{ problem.object.user.userprofile.group }}</p>
 					{% autoescape off %}
 						<p>{{ problem.engine.name }}</p>
 						<p>{{ problem.engine.description }}</p>

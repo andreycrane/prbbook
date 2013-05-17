@@ -26,7 +26,7 @@
 			<a href="/problems/group/{{ problem.group.id }}/">&larr;Группа заданий</a>
 			<br />
 			<br />
-			<p class="pull-right">{{ problem.group.name }} - {{ problem.user.first_name }} {{ problem.user.userprofile.group.name }}</p>
+			<p class="pull-right">{{ problem.group.name }} - {{ problem.user.last_name }} {{ problem.user.first_name }} {{ problem.user.userprofile.group.name }}</p>
 			{% autoescape off %}
 				<p class="lead">{{ engine.name }}</p>
 				<p>{{ engine.description }}</p>

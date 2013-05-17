@@ -2,11 +2,13 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from models import Group, UserProfile
 from prbbook.decorators import admin_only
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from prbbook.students.forms import GroupForm, StudentForm
 from prbbook.problems.models import Problem
+from parser import HtmlStudentsParser
 
 # вывод списка студентов
 @login_required(login_url='/login/')
@@ -90,3 +92,42 @@ def students_of_group(request, group_id):
     group = get_object_or_404(Group, pk = group_id)
     students_list = User.objects.filter(userprofile__group = group)
     return render_to_response("students_of_group.html",  locals())
+
+@login_required(login_url = '/login/')
+@admin_only
+def register_from_html(request):
+    created = False
+    if request.method == 'POST':
+        reg_file = request.FILES['file']
+        content = reg_file.read()
+        parser = HtmlStudentsParser(unicode(content.decode('cp1251')))
+        repeated = 0
+        for group_name, lst_name, first_name, login in parser.get_list():
+            # ищем в базе данную группу или создаем ее
+            try:
+                group = Group.objects.get(name = group_name)
+            except ObjectDoesNotExist:
+                group = Group(name = group_name)
+                group.save()
+            # ищем в базе пользователя с даным логином
+            try:
+                user = User.objects.get(username = login)
+            except ObjectDoesNotExist:
+                # если пользователь не существует создаем его
+
+                user = User(username = login, first_name = first_name, last_name = lst_name, password = login) 
+                user.save()
+            else:
+                # если пользователь существует пропускаем итерацию
+                repeated += 1
+                continue
+            # ищем в базе студента с аккаунтом и группой
+            try:
+                student = UserProfile.objects.get(user = user, group = group)
+            except ObjectDoesNotExist:
+                # если не существует создаем его
+                student = UserProfile(user = user, group = group)
+                student.save()
+        created = True
+
+    return render_to_response("register_from_html.html", locals())

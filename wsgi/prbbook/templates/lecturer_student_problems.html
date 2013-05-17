@@ -10,7 +10,7 @@
 	<div class="container page">
 		<div class="row">
 			{% include "lecturer_nav_bar.html" with menu="students" %}
-			<p class="lead">Список заданий студента {{ student.first_name }} {{ student.userprofile.group }}</p>
+			<p class="lead">Список заданий студента {{ student.last_name }} {{ student.first_name }} {{ student.userprofile.group }}</p>
 			<table class="table table-striped">
 				<tbody>
 					{% for problem in problems %}

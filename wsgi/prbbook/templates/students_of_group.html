@@ -18,7 +18,7 @@
 			<table class="table table-striped">
 				{% for student in  students_list %}
 					<tr>
-						<td>{{ student.first_name }}</td>
+						<td>{{ student.last_name }} {{ student.first_name }}</td>
 						<td>{{ student.username }}</td>
 						<td>{{ student.userprofile.group.name }}</td>
 						<td>

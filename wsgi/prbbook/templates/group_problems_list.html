@@ -19,7 +19,7 @@
 						<!-- {% cycle 'badge-success' 'badge-warning' 'badge-important' 'badge-info' 'badge-inverse' as badge %} -->
 						{% for problem in group %}
 							<tr style="background-color: {{ rowcolor }};">
-								<td>{{ problem.user.first_name }}</td>
+								<td>{{ problem.user.last_name }} {{ problem.user.first_name }}</td>
 								<td>{{ problem.get_problem_engine_display }}</td>
 								<td>
 									<a href="/problems/problem/{{ problem.id }}/">Просмотреть</a>

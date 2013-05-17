@@ -22,7 +22,7 @@
 		<div class="row-fluid">
 			{% for problem in  problems_list %}
 				<div class="page">
-					<p>{{ problem.object.group.name }} - {{ problem.object.user.first_name }} {{ problem.object.user.userprofile.group }} <span class="pull-right">UID: {{ problem.object.id }}</span></p>
+					<p>{{ problem.object.group.name }} - {{ problem.object.user.last_name }} {{ problem.object.user.first_name }} {{ problem.object.user.userprofile.group }} <span class="pull-right">UID: {{ problem.object.id }}</span></p>
 					{% autoescape off %}
 						<p>{{ problem.engine.name }}</p>
 						<p>{{ problem.engine.description }}</p>
