@@ -20,6 +20,12 @@
 						Студенты зарегистрированы. Повторяющихся аккаунтов обнаружено: {{ repeated }}.
 					</div>
 				{% endif %}
+				{% if error %}
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						В ходе разбора файла возникла ошибка. Проверьте формат файла на соответствие образцу.
+					</div>
+				{% endif %}
 				<form class="form-horizontal" method="post" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Регистрация студентов из списка в HTML-файле</legend>

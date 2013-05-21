@@ -31,7 +31,6 @@ class HtmlStudentsParser(HTMLParser, object):
 
 class CsvStudentsParser(object):
 	def __init__(self, text):
-		text = text.decode('cp1251')
 		lines = text.splitlines()[1:]
 		self.list = []
 		for line in lines:
@@ -39,8 +38,4 @@ class CsvStudentsParser(object):
 			self.list.append((columns[0], columns[2].split('-')[-1], columns[3], columns[7]))
 
 	def get_list(self):
-		return self.list			
-
-if __name__ == "__main__":
-	with file('./АВТ-СКС-08.csv', 'r') as f:
-		parser = CsvStudentsParser(f.read())
+		return self.list
