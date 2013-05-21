@@ -116,7 +116,9 @@ def register_from_html(request):
                 except ObjectDoesNotExist:
                     # если пользователь не существует создаем его
 
-                    user = User(username = login, first_name = first_name, last_name = lst_name, password = login) 
+                    user = User.objects.create_user(login, password = login) 
+                    user.first_name = first_name
+                    user.last_name = lst_name, 
                     user.save()
                 else:
                     # если пользователь существует пропускаем итерацию
@@ -157,7 +159,9 @@ def register_from_csv(request):
                 except ObjectDoesNotExist:
                     # если пользователь не существует создаем его
 
-                    user = User(username = login, first_name = first_name, last_name = lst_name, password = login) 
+                    user = User.objects.create_user(login, password = login) 
+                    user.first_name = first_name
+                    user.last_name = lst_name
                     user.save()
                 else:
                     # если пользователь существует пропускаем итерацию
