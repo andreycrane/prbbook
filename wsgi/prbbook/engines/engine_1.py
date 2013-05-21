@@ -11,7 +11,7 @@ import logging
 import traceback
 
 class ProblemEngine(Engine):
-    name = u"Задача 1. Два квадрата"
+    name = u"Задача 1. Два прямоугольника"
     short_name = __name__
     category = "Геометрические характеристики поперечных сечений"
     description = """
@@ -97,9 +97,9 @@ class ProblemEngine(Engine):
     # Проверка заданных исходных данных к задаче
     def validate(self):
         if self.z0 + self.b2 >= self.b1:
-            raise Exception("Внутренний квадрат выходит за границы внешнего")
+            raise Exception("Внутренний прямоугольник выходит за границы внешнего")
         if self.y0 + self.h2 >= self.h1:
-            raise Exception("Внутренний квадрат выходит за границы внешнего")
+            raise Exception("Внутренний прямоугольник выходит за границы внешнего")
 
     # возвращает строку с исходными данными 
     # для сохранения в БД
@@ -151,7 +151,7 @@ class ProblemEngine(Engine):
                 ]
 
             },
-            {'Координаты внутреннего квадрата':
+            {'Координаты внутреннего прямоугольника':
                 [
                     ('z<sub>0</sub>',self.z0, 'z0', '', 'см'),
                     ('y<sub>0</sub>',self.y0, 'y0', '', 'см')
