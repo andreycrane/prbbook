@@ -1,0 +1,42 @@
+{%extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static 'css/default_page.less' %}" />
+{% endblock %}
+
+{% block body %}
+	{% include "lecturer_nav_bar.html" with menu="students" %}
+	<div class="container-fluid page">
+		<div class="row-fluid">
+			<div class="span2">
+				{% include "students_nav_tabs.html" with menu="register_from_csv" %}
+			</div>
+			<div class="span6">
+				{% if created %}
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Студенты зарегистрированы. Повторяющихся аккаунтов обнаружено: {{ repeated }}.
+					</div>
+				{% endif %}
+				<form class="form-horizontal" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend>Регистрация студентов из списка в CSV-файле</legend>
+						<div class="control-group">
+							<input type="file" name="file" required="required" />
+						</div>
+   						<input class="btn btn-primary" type="submit" name="Отравить" value="Зарегистровать" />
+					</fieldset>
+				</form>
+			</div>
+			<div class="span4">
+				<br />
+				<p align="justify">Внимание! Файл должен быть в кодировке Windows-1251. В противном случае 
+				   правильность загруженых даных не гарантируется, так как программно определить
+				   кодировку файла невозможно. Также стоит обратить внимание на формат файла, скачав его
+				   по <a href="{% static 'assets/html_students.html' %}">этой</a> ссылке</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -131,3 +131,8 @@ def register_from_html(request):
         created = True
 
     return render_to_response("register_from_html.html", locals())
+
+@login_required(login_url = '/login/')
+@admin_only
+def register_from_csv(self):
+    return render_to_response("register_from_csv.html")
