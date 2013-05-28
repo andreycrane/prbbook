@@ -24,6 +24,7 @@
 				</div>
 			{% endif %}
 			<a href="/problems/group/{{ problem.group.id }}/">&larr;Группа заданий</a>
+			<a href="/students/student/{{ problem.user.id }}/problems/" class="pull-right">Список заданий студента&rarr;</a>
 			<br />
 			<br />
 			<p class="pull-right">{{ problem.group.name }} - {{ problem.user.last_name }} {{ problem.user.first_name }} {{ problem.user.userprofile.group.name }}</p>
