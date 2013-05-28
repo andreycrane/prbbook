@@ -14,7 +14,7 @@ from parser import HtmlStudentsParser, CsvStudentsParser
 @login_required(login_url='/login/')
 @admin_only
 def students(request, page):
-    students_list = User.objects.filter(is_superuser = False)
+    students_list = User.objects.filter(is_superuser = False).order_by('userprofile__group')
     # создаем обьект разбивателя на страницы
     paginator = Paginator(students_list, 25)
     students = []
