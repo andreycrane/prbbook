@@ -378,3 +378,10 @@ def student_problem_img(request, problem_id):
     response = HttpResponse(mimetype = 'image/png')
     img.save(response, 'PNG')
     return response
+
+@login_required(login_url = '/login/')
+@admin_only
+def delete_problems_group(request, group_id):
+    group = get_object_or_404(ProblemGroup, pk=int(group_id))
+    group.delete()
+    return HttpResponseRedirect('/problems/')

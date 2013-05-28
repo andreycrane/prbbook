@@ -21,5 +21,6 @@ urlpatterns = patterns('prbbook.problems.views',
 	url(r'^problem/(?P<problem_id>\d+)/student/print/$', 'student_problem_preview', name='student_problem_print'),
 	url(r'^engines/(?P<engine_name>[a-zA-z0-9._]+)/img/(?P<in_params>{(\s*\"[a-zA-Z]+\w*\"\s*:\s*[+-]?\d+\.*\d*\s*\,\s*)*' 
 		+ '(\s*\"[a-zA-Z]+\w*\"\s*:\s*[+-]?\d+\.*\d*\s*){1}})/stage/(?P<stage>\d+)/$', 'engine_img_request'),
-	url(r'^engines/preview/request/$', 'engine_preview_request')
+	url(r'^engines/preview/request/$', 'engine_preview_request'),
+	url(r'^group/(?P<group_id>\d+)/delete/$', 'delete_problems_group', name='delete_problems_group')
 )
