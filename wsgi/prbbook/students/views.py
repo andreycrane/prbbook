@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from prbbook.students.forms import GroupForm, StudentForm
 from prbbook.problems.models import Problem
 from parser import HtmlStudentsParser, CsvStudentsParser
+from django.http import HttpResponseRedirect
 
 # вывод списка студентов
 @login_required(login_url='/login/')
@@ -178,3 +179,13 @@ def register_from_csv(request):
         except Exception as e:
             error = str(e)
     return render_to_response("register_from_csv.html", locals())
+
+@login_required(login_url = '/login/')
+@admin_only
+def delete_students_group(request, group_id):
+    group = get_object_or_404(Group, pk = int(group_id))
+    for student in UserProfile.objects.filter(group = group):
+        student.user.delete()
+        student.delete()
+    group.delete()
+    return HttpResponseRedirect('/students/groups/')
