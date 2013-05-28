@@ -24,6 +24,11 @@
 										<a href={% url "students_of_group" group.id %}>Просмотреть</a>
 									</span>
 								</td>
+								<td>
+									<span class="pull-right">
+										<a href="/delete/{{ group.id }}/" class="text-error delete-link">Удалить</a>
+									</span>
+								</td>
 							</tr>
 						{% empty %}
 							<p>Не зарегистриованно групп.</p>
@@ -58,4 +63,29 @@
 			</div>
 		</div>
 	</div>
+	<div id="delete-modal" class="modal hide fade">
+  		<div class="modal-body">
+  			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    		<p>Удалить группу студентов?</p>
+  		</div>
+  		<div class="modal-footer">
+    		<a id="modal-close" href="#" class="btn">Отмена</a>
+    		<a id="delete-btn-modal" href="#" class="btn btn-danger">Удалить</a>
+  		</div>
+	</div>
+	<script type="application/x-javascript">
+		$(function() {
+			$("#modal-close").click(function() {
+				$("#delete-modal").modal("hide"); 
+			});
+
+			$("a.delete-link").each(function() {
+				$(this).click(function(event) {
+					event.preventDefault();
+					$("#delete-btn-modal").attr({'href': $(this).attr('href') });
+					$("#delete-modal").modal();
+				});
+			});
+		});
+	</script>
 {% endblock %}
